@@ -1,0 +1,59 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=14 format=3 uid="uid://sccv00c6phxu"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dddk1"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vp4s7"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hsgsh"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cex6k"]
+animation = &"stunned"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ccqoy"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m1dgl"]
+advance_mode = 2
+advance_condition = &"attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q4b65"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ausen"]
+advance_mode = 2
+advance_expression = "velocity"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hwyj2"]
+advance_mode = 2
+advance_expression = "!velocity"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dddk1"]
+advance_mode = 2
+advance_condition = &"attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vp4s7"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ofdoy"]
+advance_mode = 2
+advance_condition = &"parried"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cex6k"]
+switch_mode = 2
+advance_mode = 2
+
+[resource]
+states/attack/node = SubResource("AnimationNodeAnimation_dddk1")
+states/attack/position = Vector2(356, 216)
+states/idle/node = SubResource("AnimationNodeAnimation_vp4s7")
+states/idle/position = Vector2(331, 77)
+states/run/node = SubResource("AnimationNodeAnimation_hsgsh")
+states/run/position = Vector2(433, 77)
+states/stunned/node = SubResource("AnimationNodeAnimation_cex6k")
+states/stunned/position = Vector2(557, 161)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ccqoy"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_m1dgl"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_q4b65"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_ausen"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_hwyj2"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_dddk1"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_vp4s7"), "attack", "stunned", SubResource("AnimationNodeStateMachineTransition_ofdoy"), "stunned", "idle", SubResource("AnimationNodeStateMachineTransition_cex6k")]

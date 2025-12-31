@@ -1,0 +1,51 @@
+[gd_scene load_steps=11 format=3 uid="uid://xoaana6wd66l"]
+
+[ext_resource type="Script" uid="uid://d16ieatpa6gb8" path="res://scripts/test_enemy.gd" id="1_fpxyv"]
+[ext_resource type="Texture2D" uid="uid://bon5ht28acplg" path="res://assets/white_rectangle.png" id="1_h17bh"]
+[ext_resource type="Script" uid="uid://bo0ibaxyi3y8j" path="res://scripts/hurtbox.gd" id="2_mkyue"]
+[ext_resource type="PackedScene" uid="uid://70283chaxaxy" path="res://scenes/enemy_weapon.tscn" id="3_t46gg"]
+[ext_resource type="Script" uid="uid://br8s2pfencfh7" path="res://scripts/state_machine.gd" id="4_lkcdx"]
+[ext_resource type="Script" uid="uid://b8u813j30u3cx" path="res://scripts/enemy_idle.gd" id="5_8c00y"]
+[ext_resource type="Script" uid="uid://dinglix0mke55" path="res://scripts/enemy_chasing.gd" id="6_jqw88"]
+[ext_resource type="Script" uid="uid://bi7nueyq3bnkh" path="res://scripts/enemy_attacking.gd" id="7_1y3pe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkyue"]
+size = Vector2(32, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h17bh"]
+size = Vector2(34, 49)
+
+[node name="test_enemy" type="CharacterBody2D"]
+script = ExtResource("1_fpxyv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_h17bh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mkyue")
+
+[node name="EnemyWeapon" parent="." instance=ExtResource("3_t46gg")]
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("2_mkyue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_h17bh")
+debug_color = Color(0.98338693, 0, 0.35783058, 0.41960785)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_lkcdx")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_8c00y")
+enemy = NodePath("../..")
+
+[node name="Chasing" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_jqw88")
+enemy = NodePath("../..")
+
+[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_1y3pe")
+enemy = NodePath("../..")

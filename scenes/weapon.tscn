@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://y2ur6tkd6fec"]
+
+[ext_resource type="Texture2D" uid="uid://c3pgmvp6aiv3g" path="res://assets/white_sqaure.png" id="1_xasec"]
+[ext_resource type="Script" uid="uid://dogm3rgu7wu68" path="res://scripts/weapon.gd" id="2_uxn4k"]
+
+[node name="Weapon" type="Node2D"]
+modulate = Color(0.13319641, 0.13319641, 0.13319638, 1)
+script = ExtResource("2_uxn4k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 1.8562709)
+scale = Vector2(0.062499996, 1.7034106)
+texture = ExtResource("1_xasec")
+offset = Vector2(0, -15.616728)

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://q4g6nkeblx2b"]
+
+[ext_resource type="Texture2D" uid="uid://c3pgmvp6aiv3g" path="res://assets/white_sqaure.png" id="1_uecpb"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_raltb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gsqoq"]
+size = Vector2(32, 32)
+
+[node name="TestBox" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_raltb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_uecpb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gsqoq")

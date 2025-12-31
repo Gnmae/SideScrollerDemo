@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1xahwlq1lgdi"]
+
+[ext_resource type="PackedScene" uid="uid://xoaana6wd66l" path="res://scenes/test_enemy.tscn" id="1_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://c2mct08gq2rp3" path="res://icon.svg" id="1_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://b2qesw1ew6088" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://q4g6nkeblx2b" path="res://scenes/test_box.tscn" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://bf1hrqxa4wn7w" path="res://scripts/ui.gd" id="5_iywne"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p57ef"]
+bg_color = Color(0.6007938, 0, 0.20449537, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iywne"]
+bg_color = Color(0.2, 1, 0.4862745, 1)
+
+[node name="Game" type="Node2D"]
+
+[node name="background" type="Sprite2D" parent="."]
+modulate = Color(0.45840502, 0.45840508, 0.45840502, 1)
+scale = Vector2(18.602398, 6.676172)
+texture = ExtResource("1_lnu2h")
+
+[node name="test_enemy" parent="." instance=ExtResource("1_lbhrr")]
+position = Vector2(221, 79)
+
+[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+position = Vector2(-271, 21)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(0, -50)
+zoom = Vector2(4, 4)
+
+[node name="TestBox" parent="." instance=ExtResource("2_yqjtg")]
+modulate = Color(0, 0.5411765, 0.19215687, 1)
+position = Vector2(-4, 179)
+scale = Vector2(75.600006, 4.640001)
+
+[node name="TestBox2" parent="." instance=ExtResource("2_yqjtg")]
+modulate = Color(0, 0.5411765, 0.19215687, 1)
+position = Vector2(-1154, 55)
+scale = Vector2(3.7200031, 3.0799994)
+
+[node name="TestBox3" parent="." instance=ExtResource("2_yqjtg")]
+modulate = Color(0, 0.5411765, 0.19215687, 1)
+position = Vector2(1143, 54.999996)
+scale = Vector2(3.7200031, 3.0799994)
+
+[node name="TestBox4" parent="." instance=ExtResource("2_yqjtg")]
+modulate = Color(0, 0.5411765, 0.19215687, 1)
+position = Vector2(-15, -76.999985)
+scale = Vector2(60.889812, -2.3286455)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_iywne")
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/UI"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 69.0
+offset_right = 702.0
+offset_bottom = 104.0
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/UI/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+show_percentage = false
+
+[node name="Orangebar" type="ProgressBar" parent="CanvasLayer/UI/BoxContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_p57ef")
+value = 100.0
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/UI/BoxContainer/ProgressBar/Orangebar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_iywne")
+value = 50.0
+show_percentage = false
+
+[connection signal="StatsChanged" from="Player" to="CanvasLayer/UI" method="_on_player_stats_changed"]
