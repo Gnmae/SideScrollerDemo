@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var state_machine : Node
 
 const SPEED = 250.0
-const JUMP_VELOCITY = -600.0
+const JUMP_VELOCITY = -400.0
 const KNOCKBACK = -100.0
 
 var direction = 1
@@ -18,6 +18,10 @@ func _ready()-> void:
 	StatsChanged.emit(current_health, max_health)
 
 func _physics_process(delta: float) -> void:
+	if state_machine.current_state.name.to_lower() == "dashing":
+		move_and_slide()
+		return
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
