@@ -2,12 +2,23 @@ extends CharacterBody2D
 
 @export var state_machine : Node
 
-const SPEED = 250.0
-const JUMP_VELOCITY = -400.0
-const KNOCKBACK = -100.0
+const SPEED = 400.0
+const INITIAL_JUMP_VELOCITY = -600.0
+const JUMP_VELOCITY = -1000.0
+const MAX_JUMP_HOLD_TIME = 0.3
+const KNOCKBACK = -200.0
+
 
 var direction = 1
+var dir_y = 0
 var knockback_velocity = 0.0
+var can_jump : bool = false
+var jump_hold_timer : float = 0.0
+
+var gravity : float = 1500.0
+var current_gravity : float = gravity
+var fast_fall_multiplier : float = 2.0
+var jumping_multiplier : float = 0.8
 
 signal StatsChanged
 var max_health = 500.0
@@ -23,23 +34,50 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity.y += current_gravity * delta
+	else:
+		current_gravity = gravity
 
-	if Input.is_action_just_pressed("Jump") and is_on_floor():
-		velocity.y += JUMP_VELOCITY
+	if can_jump == false and is_on_floor():
+		can_jump = true
+	
+	if (is_on_floor() == false) and can_jump and $CoyoteTimer.is_stopped():
+		$CoyoteTimer.start()
+	
+	if can_jump:
+		if Input.is_action_just_pressed("Jump"):
+			velocity.y = INITIAL_JUMP_VELOCITY
+			jump_hold_timer = 0.0
+	else:
+		if Input.is_action_pressed("Jump") and jump_hold_timer < MAX_JUMP_HOLD_TIME:
+			velocity.y += JUMP_VELOCITY * get_physics_process_delta_time()
+			current_gravity = gravity * jumping_multiplier
+			jump_hold_timer += delta
+		elif Input.is_action_just_released("Jump") and velocity.y < 0:
+			current_gravity = gravity * fast_fall_multiplier
+	
 
 	var input_direction := Input.get_axis("left_arrow", "right_arrow")
+	var input_dir_y := Input.get_axis("down_arrow", "up_arrow")
 	if input_direction:
-		direction = input_direction # update facing direction
-		if direction < 0:
-			$Weapon.position = Vector2(-14.0, -1.0)
-		else:
-			$Weapon.position = Vector2(14.0, -1.0)
+		if state_machine.current_state.name.to_lower() != "attacking":
+			direction = input_direction # update facing direction
 		velocity.x = input_direction * SPEED
 	else:
 		velocity.x = 0 + knockback_velocity
+	
+	if input_dir_y:
+		dir_y = input_dir_y
+	else:
+		dir_y = 0
+	if dir_y < 0 and velocity.y == 0:
+		dir_y = 0
 
 	move_and_slide()
+
+func jump():
+	pass
+
 
 func take_knockback():
 	knockback_velocity = KNOCKBACK
@@ -53,4 +91,25 @@ func take_damage(amt, source):
 		return
 	current_health -= amt
 	StatsChanged.emit(current_health, max_health)
+	hurt_animation()
+	frame_freeze(0.05, 0.4)
 	take_knockback()
+
+func frame_freeze(timeScale, duration):
+	Engine.time_scale = timeScale
+	await get_tree().create_timer(duration * timeScale).timeout
+	Engine.time_scale = 1
+
+func hurt_animation():
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	self.modulate = Color(6, 6, 6)
+	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.2)
+	tween.tween_property(self, "modulate", Color(2, 2, 2), 0.1)
+	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.2)
+	tween.tween_property(self, "modulate", Color(2, 2, 2), 0.1)
+	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.2)
+
+
+func _on_coyote_timer_timeout() -> void:
+	can_jump = false

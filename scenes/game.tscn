@@ -26,8 +26,8 @@ position = Vector2(221, 79)
 position = Vector2(-271, 21)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-offset = Vector2(0, -50)
-zoom = Vector2(4, 4)
+offset = Vector2(0, -125)
+zoom = Vector2(1.5, 1.5)
 
 [node name="TestBox" parent="." instance=ExtResource("2_yqjtg")]
 modulate = Color(0, 0.5411765, 0.19215687, 1)
@@ -36,18 +36,23 @@ scale = Vector2(75.600006, 4.640001)
 
 [node name="TestBox2" parent="." instance=ExtResource("2_yqjtg")]
 modulate = Color(0, 0.5411765, 0.19215687, 1)
-position = Vector2(-1154, 55)
-scale = Vector2(3.7200031, 3.0799994)
+position = Vector2(-1154, 16.999992)
+scale = Vector2(3.7200031, 5.640001)
+
+[node name="TestBox5" parent="." instance=ExtResource("2_yqjtg")]
+modulate = Color(0, 0.5411765, 0.19215687, 1)
+position = Vector2(-913.00006, 52)
+scale = Vector2(3.7200031, 3.3200002)
 
 [node name="TestBox3" parent="." instance=ExtResource("2_yqjtg")]
 modulate = Color(0, 0.5411765, 0.19215687, 1)
 position = Vector2(1143, 54.999996)
-scale = Vector2(3.7200031, 3.0799994)
+scale = Vector2(9.120003, 3.0799994)
 
 [node name="TestBox4" parent="." instance=ExtResource("2_yqjtg")]
 modulate = Color(0, 0.5411765, 0.19215687, 1)
-position = Vector2(-15, -76.999985)
-scale = Vector2(60.889812, -2.3286455)
+position = Vector2(155, -197)
+scale = Vector2(56.449814, -2.3286455)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c01r1s2hvhefw" path="res://scripts/enemy_hitbox.gd" id="1_6tm2y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vdsg"]
-size = Vector2(38, 55.5)
+size = Vector2(34, 51)
 
 [node name="HitArea2D" type="Area2D"]
 collision_layer = 2
@@ -11,7 +11,7 @@ collision_mask = 2
 script = ExtResource("1_6tm2y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4.7683716e-07, -1.4901161e-08)
+position = Vector2(4.7683716e-07, -0.49999997)
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_0vdsg")
 debug_color = Color(0.9610358, 1.540184e-06, 0.515385, 0.41960785)
