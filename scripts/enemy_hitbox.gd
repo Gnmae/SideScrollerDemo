@@ -1,7 +1,10 @@
-extends Area2D
+class_name Hitbox extends Area2D
 
-var dmg : float = 0.0
 var source 
+
+@export var dmg : float = 0.0
+@export var timeScale : float = 0.05
+@export var duration : float = 0.02
 
 func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
@@ -9,4 +12,9 @@ func _ready() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.has_method("take_damage"):
-		area.take_damage(dmg, source)
+		area.take_damage(dmg, self)
+		self.queue_free()
+
+func parried() -> void:
+	if source.has_method("parried"):
+		source.parried()

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://map17u4voipg"]
+
+[ext_resource type="Script" uid="uid://dxy1m05rop7m6" path="res://scripts/vfx.gd" id="1_ndn0p"]
+[ext_resource type="Texture2D" uid="uid://dqhppllro6on6" path="res://assets/blender imports/redslashprac1.png" id="1_nx0n7"]
+
+[node name="redslashprac1" type="Node2D"]
+script = ExtResource("1_ndn0p")
+duration = 0.2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-3, 0)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_nx0n7")

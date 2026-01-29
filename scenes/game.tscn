@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1xahwlq1lgdi"]
+[gd_scene format=3 uid="uid://d1xahwlq1lgdi"]
 
-[ext_resource type="PackedScene" uid="uid://xoaana6wd66l" path="res://scenes/test_enemy.tscn" id="1_lbhrr"]
-[ext_resource type="Texture2D" uid="uid://c2mct08gq2rp3" path="res://icon.svg" id="1_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://bon5ht28acplg" path="res://assets/white_rectangle.png" id="1_iywne"]
+[ext_resource type="PackedScene" uid="uid://xoaana6wd66l" path="res://scenes/skeleton.tscn" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://b2qesw1ew6088" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://q4g6nkeblx2b" path="res://scenes/test_box.tscn" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://bf1hrqxa4wn7w" path="res://scripts/ui.gd" id="5_iywne"]
@@ -12,51 +12,57 @@ bg_color = Color(0.6007938, 0, 0.20449537, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iywne"]
 bg_color = Color(0.2, 1, 0.4862745, 1)
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" unique_id=1800550192]
 
-[node name="background" type="Sprite2D" parent="."]
-modulate = Color(0.45840502, 0.45840508, 0.45840502, 1)
-scale = Vector2(18.602398, 6.676172)
-texture = ExtResource("1_lnu2h")
+[node name="background" type="Sprite2D" parent="." unique_id=1747731462]
+modulate = Color(0.115677096, 0.05485215, 0.08526818, 1)
+position = Vector2(122.500046, -199.65424)
+scale = Vector2(101.03125, 35.056072)
+texture = ExtResource("1_iywne")
 
-[node name="test_enemy" parent="." instance=ExtResource("1_lbhrr")]
-position = Vector2(221, 79)
-
-[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+[node name="Player" parent="." unique_id=941033691 instance=ExtResource("1_uwrxv")]
 position = Vector2(-271, 21)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-offset = Vector2(0, -125)
-zoom = Vector2(1.5, 1.5)
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1173480959]
 
-[node name="TestBox" parent="." instance=ExtResource("2_yqjtg")]
-modulate = Color(0, 0.5411765, 0.19215687, 1)
+[node name="test_enemy" parent="." unique_id=1568679796 instance=ExtResource("1_lbhrr")]
+position = Vector2(221, 79)
+
+[node name="2DEnvironment" type="Node2D" parent="." unique_id=1977502046]
+
+[node name="TestBox" parent="2DEnvironment" unique_id=897792588 instance=ExtResource("2_yqjtg")]
+modulate = Color(0.011351354, 0.12861207, 0.1512675, 1)
 position = Vector2(-4, 179)
 scale = Vector2(75.600006, 4.640001)
 
-[node name="TestBox2" parent="." instance=ExtResource("2_yqjtg")]
-modulate = Color(0, 0.5411765, 0.19215687, 1)
+[node name="TestBox2" parent="2DEnvironment" unique_id=512796173 instance=ExtResource("2_yqjtg")]
+modulate = Color(0.011351354, 0.12861207, 0.1512675, 1)
 position = Vector2(-1154, 16.999992)
 scale = Vector2(3.7200031, 5.640001)
 
-[node name="TestBox5" parent="." instance=ExtResource("2_yqjtg")]
-modulate = Color(0, 0.5411765, 0.19215687, 1)
+[node name="TestBox5" parent="2DEnvironment" unique_id=2110379150 instance=ExtResource("2_yqjtg")]
+modulate = Color(0.011351354, 0.12861207, 0.1512675, 1)
 position = Vector2(-913.00006, 52)
 scale = Vector2(3.7200031, 3.3200002)
 
-[node name="TestBox3" parent="." instance=ExtResource("2_yqjtg")]
-modulate = Color(0, 0.5411765, 0.19215687, 1)
+[node name="TestBox6" parent="2DEnvironment" unique_id=212020187 instance=ExtResource("2_yqjtg")]
+modulate = Color(0.3926947, 1.3905958, 1.5720325, 1)
+position = Vector2(-139.00006, -154.00003)
+scale = Vector2(8.4000025, 0.24000168)
+
+[node name="TestBox3" parent="2DEnvironment" unique_id=1702037197 instance=ExtResource("2_yqjtg")]
+modulate = Color(0.011351354, 0.12861207, 0.1512675, 1)
 position = Vector2(1143, 54.999996)
 scale = Vector2(9.120003, 3.0799994)
 
-[node name="TestBox4" parent="." instance=ExtResource("2_yqjtg")]
-modulate = Color(0, 0.5411765, 0.19215687, 1)
+[node name="TestBox4" parent="2DEnvironment" unique_id=193961251 instance=ExtResource("2_yqjtg")]
+modulate = Color(0.011351354, 0.12861207, 0.1512675, 1)
 position = Vector2(155, -197)
 scale = Vector2(56.449814, -2.3286455)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1034315838]
 
-[node name="UI" type="Control" parent="CanvasLayer"]
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=673279619]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,20 +71,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_iywne")
 
-[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/UI"]
-layout_mode = 0
-offset_left = 88.0
-offset_top = 69.0
-offset_right = 702.0
-offset_bottom = 104.0
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/UI" unique_id=2136111053]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 14.0
+offset_right = 297.0
+offset_bottom = 38.0
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/UI/BoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/UI/BoxContainer" unique_id=817090337]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 show_percentage = false
 
-[node name="Orangebar" type="ProgressBar" parent="CanvasLayer/UI/BoxContainer/ProgressBar"]
+[node name="Orangebar" type="ProgressBar" parent="CanvasLayer/UI/BoxContainer/ProgressBar" unique_id=873782752]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,7 +95,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_p57ef")
 value = 100.0
 show_percentage = false
 
-[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/UI/BoxContainer/ProgressBar/Orangebar"]
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/UI/BoxContainer/ProgressBar/Orangebar" unique_id=13481912]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15

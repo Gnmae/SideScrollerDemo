@@ -1,4 +1,4 @@
-class_name Hitbox extends Area2D
+extends Area2D
 
 const trick_effect = preload("res://effects/trick.tscn")
 

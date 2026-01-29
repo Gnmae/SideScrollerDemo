@@ -3,9 +3,9 @@ extends CharacterBody2D
 @export var state_machine : Node
 
 const SPEED = 400.0
-const INITIAL_JUMP_VELOCITY = -600.0
-const JUMP_VELOCITY = -1000.0
-const MAX_JUMP_HOLD_TIME = 0.3
+const INITIAL_JUMP_VELOCITY = -700.0
+const JUMP_VELOCITY = -350.0
+const MAX_JUMP_HOLD_TIME = 0.2
 const KNOCKBACK = -200.0
 
 
@@ -13,12 +13,13 @@ var direction = 1
 var dir_y = 0
 var knockback_velocity = 0.0
 var can_jump : bool = false
+var jumped : bool = false
 var jump_hold_timer : float = 0.0
 
 var gravity : float = 1500.0
 var current_gravity : float = gravity
-var fast_fall_multiplier : float = 2.0
-var jumping_multiplier : float = 0.8
+var fast_fall_multiplier : float = 2.5
+var jumping_multiplier : float = 0.5
 
 signal StatsChanged
 var max_health = 500.0
@@ -48,13 +49,16 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("Jump"):
 			velocity.y = INITIAL_JUMP_VELOCITY
 			jump_hold_timer = 0.0
+			jumped = true
 	else:
 		if Input.is_action_pressed("Jump") and jump_hold_timer < MAX_JUMP_HOLD_TIME:
 			velocity.y += JUMP_VELOCITY * get_physics_process_delta_time()
 			current_gravity = gravity * jumping_multiplier
 			jump_hold_timer += delta
-		elif Input.is_action_just_released("Jump") and velocity.y < 0:
+		elif jumped == true:
 			current_gravity = gravity * fast_fall_multiplier
+		else:
+			jumped = false
 	
 
 	var input_direction := Input.get_axis("left_arrow", "right_arrow")
@@ -88,6 +92,7 @@ func take_damage(amt, source):
 	if $StateMachine.current_state.name.to_lower() == "parrying":
 		$Sounds/ParrySuccessful.play(0.7)
 		source.parried()
+		frame_freeze(0.05, 0.4)
 		return
 	current_health -= amt
 	StatsChanged.emit(current_health, max_health)
