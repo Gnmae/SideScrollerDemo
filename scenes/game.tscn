@@ -20,45 +20,43 @@ position = Vector2(122.500046, -199.65424)
 scale = Vector2(101.03125, 35.056072)
 texture = ExtResource("1_iywne")
 
-[node name="Player" parent="." unique_id=941033691 instance=ExtResource("1_uwrxv")]
-position = Vector2(-271, 21)
+[node name="World2D" type="Node2D" parent="." unique_id=1977502046]
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1173480959]
-
-[node name="test_enemy" parent="." unique_id=1568679796 instance=ExtResource("1_lbhrr")]
-position = Vector2(221, 79)
-
-[node name="2DEnvironment" type="Node2D" parent="." unique_id=1977502046]
-
-[node name="TestBox" parent="2DEnvironment" unique_id=897792588 instance=ExtResource("2_yqjtg")]
+[node name="TestBox" parent="World2D" unique_id=897792588 instance=ExtResource("2_yqjtg")]
 modulate = Color(0.011351354, 0.12861207, 0.1512675, 1)
 position = Vector2(-4, 179)
 scale = Vector2(75.600006, 4.640001)
 
-[node name="TestBox2" parent="2DEnvironment" unique_id=512796173 instance=ExtResource("2_yqjtg")]
+[node name="TestBox2" parent="World2D" unique_id=512796173 instance=ExtResource("2_yqjtg")]
 modulate = Color(0.011351354, 0.12861207, 0.1512675, 1)
 position = Vector2(-1154, 16.999992)
 scale = Vector2(3.7200031, 5.640001)
 
-[node name="TestBox5" parent="2DEnvironment" unique_id=2110379150 instance=ExtResource("2_yqjtg")]
+[node name="TestBox5" parent="World2D" unique_id=2110379150 instance=ExtResource("2_yqjtg")]
 modulate = Color(0.011351354, 0.12861207, 0.1512675, 1)
 position = Vector2(-913.00006, 52)
 scale = Vector2(3.7200031, 3.3200002)
 
-[node name="TestBox6" parent="2DEnvironment" unique_id=212020187 instance=ExtResource("2_yqjtg")]
+[node name="TestBox6" parent="World2D" unique_id=212020187 instance=ExtResource("2_yqjtg")]
 modulate = Color(0.3926947, 1.3905958, 1.5720325, 1)
 position = Vector2(-139.00006, -154.00003)
 scale = Vector2(8.4000025, 0.24000168)
 
-[node name="TestBox3" parent="2DEnvironment" unique_id=1702037197 instance=ExtResource("2_yqjtg")]
+[node name="TestBox3" parent="World2D" unique_id=1702037197 instance=ExtResource("2_yqjtg")]
 modulate = Color(0.011351354, 0.12861207, 0.1512675, 1)
 position = Vector2(1143, 54.999996)
 scale = Vector2(9.120003, 3.0799994)
 
-[node name="TestBox4" parent="2DEnvironment" unique_id=193961251 instance=ExtResource("2_yqjtg")]
+[node name="TestBox4" parent="World2D" unique_id=193961251 instance=ExtResource("2_yqjtg")]
 modulate = Color(0.011351354, 0.12861207, 0.1512675, 1)
 position = Vector2(155, -197)
 scale = Vector2(56.449814, -2.3286455)
+
+[node name="Player" parent="World2D" unique_id=941033691 instance=ExtResource("1_uwrxv")]
+position = Vector2(-271, 21)
+
+[node name="test_enemy" parent="World2D" unique_id=1568679796 instance=ExtResource("1_lbhrr")]
+position = Vector2(220, 70)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1034315838]
 

@@ -1,0 +1,29 @@
+[gd_resource type="TileSet" format=3 uid="uid://ciiywt3vp1va6"]
+
+[ext_resource type="Texture2D" uid="uid://p0qx6dralnai" path="res://assets/temptiles/upper_half.png" id="1_1bn2b"]
+[ext_resource type="Texture2D" uid="uid://xam7otwm76i5" path="res://assets/temptiles/block.png" id="2_stkkw"]
+[ext_resource type="Texture2D" uid="uid://cdsssyxxmisyu" path="res://assets/temptiles/dark.png" id="3_uyrl1"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vqle3"]
+texture = ExtResource("1_1bn2b")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 0, 16, 0, 16, -16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jghob"]
+texture = ExtResource("2_stkkw")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d6v0s"]
+texture = ExtResource("3_uyrl1")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_vqle3")
+sources/1 = SubResource("TileSetAtlasSource_jghob")
+sources/2 = SubResource("TileSetAtlasSource_d6v0s")

@@ -25,12 +25,12 @@ func _physics_process(delta: float) -> void:
 	elif direction > 0:
 		$"../Sprite".scale.x = 1.0
 	var y_dir = player.velocity.normalized().y
-	if Input.is_action_pressed("up_arrow"):
+	if Input.is_action_pressed("move_up"):
 		if $"../Sprite".scale.x == -1.0:
 			pass
 		else:
 			pass
-	elif Input.is_action_pressed("down_arrow") and y_dir != 0:
+	elif Input.is_action_pressed("move_down") and y_dir != 0:
 		if $"../Sprite".scale.x == -1.0:
 			pass
 		else:
