@@ -490,6 +490,7 @@ shape = SubResource("CapsuleShape2D_jej6c")
 debug_color = Color(0.98338693, 0, 0.35783058, 0.41960785)
 
 [node name="StateMachine" type="Node" parent="." unique_id=735690807 node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
 script = ExtResource("4_dqkch")
 initial_state = NodePath("Idle")
 
@@ -544,7 +545,8 @@ parameters/conditions/attacking = false
 parameters/conditions/dashing = false
 parameters/conditions/parrying = false
 
-[node name="StatsHandler" parent="." unique_id=879032711 instance=ExtResource("19_4r5pv")]
+[node name="StatsHandler" parent="." unique_id=879032711 node_paths=PackedStringArray("target") instance=ExtResource("19_4r5pv")]
 unique_name_in_owner = true
+target = NodePath("..")
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

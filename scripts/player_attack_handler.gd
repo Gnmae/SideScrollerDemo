@@ -16,10 +16,10 @@ func do_attack(direction):
 	player.add_child(hitbox)
 	player.add_child(vfx)
 	vfx.scale = $"../Sprite".scale
-	if get_parent().dir_y < 0:
+	if player.dir_y < 0:
 		hitbox.global_position = self.global_position + Vector2(0, Y_OFFSET)
 		vfx.global_position = self.global_position + Vector2(0, Y_OFFSET)
-	elif get_parent().dir_y > 0:
+	elif player.dir_y > 0:
 		hitbox.global_position = self.global_position + Vector2(0, -Y_OFFSET)
 		vfx.global_position = self.global_position + Vector2(0, -Y_OFFSET)
 	elif direction < 0:
@@ -30,4 +30,4 @@ func do_attack(direction):
 		vfx.global_position = self.global_position + Vector2(X_OFFSET, 0)
 	# sets hitbox dmg
 	hitbox.dmg = dmg
-	hitbox.source = get_parent()
+	hitbox.source = %StatsHandler

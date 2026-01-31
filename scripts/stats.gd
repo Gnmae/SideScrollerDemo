@@ -89,11 +89,6 @@ func recalculate_stats() -> void:
 		var cur_property_name: String = str("current_" + stat_name)
 		set(cur_property_name, get(cur_property_name) + stat_addends[stat_name])
 
-func take_damage(value : int) -> void:
-	var dmg_taken = value / current_defense
-	var new_health = health - dmg_taken
-	_on_health_set(new_health)
-
 func _on_health_set(new_value : int) -> void:
 	health = clampi(new_value, 0, current_max_health)
 	health_changed.emit(health, current_max_health)

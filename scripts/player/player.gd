@@ -21,14 +21,6 @@ var current_gravity : float = gravity
 var fast_fall_multiplier : float = 2.5
 var jumping_multiplier : float = 0.5
 
-signal StatsChanged
-var max_health = 500.0
-var current_health
-
-func _ready()-> void:
-	current_health = max_health
-	StatsChanged.emit(current_health, max_health)
-
 func _physics_process(delta: float) -> void:
 	if state_machine.current_state.name.to_lower() == "dashing":
 		move_and_slide()
@@ -85,25 +77,8 @@ func jump():
 
 func take_knockback():
 	knockback_velocity = KNOCKBACK
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.1).timeout	
 	knockback_velocity = 0
-
-func take_damage(amt, source):
-	if $StateMachine.current_state.name.to_lower() == "parrying":
-		$Sounds/ParrySuccessful.play(0.7)
-		source.parried()
-		frame_freeze(0.05, 0.4)
-		return
-	current_health -= amt
-	StatsChanged.emit(current_health, max_health)
-	hurt_animation()
-	frame_freeze(0.05, 0.4)
-	take_knockback()
-
-func frame_freeze(timeScale, duration):
-	Engine.time_scale = timeScale
-	await get_tree().create_timer(duration * timeScale).timeout
-	Engine.time_scale = 1
 
 func hurt_animation():
 	var tween = create_tween()

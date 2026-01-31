@@ -24,7 +24,7 @@ func take_damage(amt : float, source: Node):
 	print(str(amt))
 	hurt_animation()
 	if source.get("timeScale") and source.get("duration"):
-		frame_freeze(source.timeScale, source.duration)
+		Globals.frame_freeze(source.timeScale, source.duration)
 
 func take_effect(amt : int, effect : Effect):
 	var index = find_effect(effect) # returns -1 if not found
@@ -57,10 +57,8 @@ func activate_effect(effect: Effect):
 	effects.remove_at(index)
 	effect.queue_free()
 
-func frame_freeze(timeScale, duration):
-	Engine.time_scale = timeScale
-	await get_tree().create_timer(duration * timeScale).timeout
-	Engine.time_scale = 1
+func _on_death():
+	self.queue_free()
 
 func hurt_animation():
 	var tween = create_tween()
