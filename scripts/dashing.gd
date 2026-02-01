@@ -1,7 +1,7 @@
 extends State
 
 const DASH_WINDOW : float = 0.2  # seconds
-const DASH_VELOCITY : float = 1750.0
+const DASH_VELOCITY : float = 600.0
 const DASH_COOLDOWN : float = 0.6 # seconds
 
 @export var player : CharacterBody2D

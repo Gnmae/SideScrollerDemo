@@ -20,6 +20,7 @@ const STAT_CURVES: Dictionary[BuffableStats, Curve] = {
 const BASE_LEVEL_XP : float = 100.0
 
 signal health_depleted
+@warning_ignore("unused_signal")
 signal health_damaged(source : Stats)
 signal health_changed(cur_health: int, max_health: int)
 

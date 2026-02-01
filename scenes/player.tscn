@@ -455,9 +455,6 @@ graph_offset = Vector2(-256, 49)
 script = ExtResource("1_g2els")
 state_machine = NodePath("StateMachine")
 
-[node name="CoyoteTimer" type="Timer" parent="." unique_id=79661050]
-wait_time = 0.1
-
 [node name="Sprite" type="Node2D" parent="." unique_id=861436463]
 texture_filter = 1
 
@@ -553,4 +550,17 @@ target = NodePath("..")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=350414027]
 
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=79661050]
+wait_time = 0.1
+
+[node name="JumpBufferTimer" type="Timer" parent="." unique_id=184229952]
+wait_time = 0.15
+one_shot = true
+
+[node name="JumpHeightTimer" type="Timer" parent="." unique_id=820485303]
+wait_time = 0.15
+one_shot = true
+
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
+[connection signal="timeout" from="JumpHeightTimer" to="." method="_on_jump_height_timer_timeout"]

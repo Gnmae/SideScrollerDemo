@@ -4,9 +4,7 @@ class_name Player extends CharacterBody2D
 
 #region movement script variables
 const SPEED = 400.0
-const INITIAL_JUMP_VELOCITY = -700.0
-const JUMP_VELOCITY = -350.0
-const MAX_JUMP_HOLD_TIME = 0.2
+const INITIAL_JUMP_VELOCITY = -500
 const KNOCKBACK = -200.0
 
 var direction = 1
@@ -14,12 +12,12 @@ var dir_y = 0
 var knockback_velocity = 0.0
 var can_jump : bool = false
 var jumped : bool = false
-var jump_hold_timer : float = 0.0
+var jump_buffered : bool = false
+@onready var jump_buffer_timer = $JumpBufferTimer
+@onready var jump_height_timer = $JumpHeightTimer
 
 var gravity : float = 1500.0
 var current_gravity : float = gravity
-var fast_fall_multiplier : float = 2.5
-var jumping_multiplier : float = 0.5 
 
 #region input/controller related variables
 @onready var controller_container = $ControllerContainer
@@ -27,7 +25,6 @@ var jumping_multiplier : float = 0.5
 var controller : PlayerController
 var horizontal_input
 var vertical_input
-var jump_pressed : bool = false
 
 #region functions
 
@@ -48,15 +45,13 @@ func move(input : Vector2) -> void:
 
 func jump():
 	if can_jump:
+		jump_height_timer.start()
 		velocity.y = INITIAL_JUMP_VELOCITY
-		jump_hold_timer = 0.0
 		jumped = true
-	elif jump_hold_timer < MAX_JUMP_HOLD_TIME:
-		velocity.y += JUMP_VELOCITY * get_physics_process_delta_time()
-		current_gravity = gravity * jumping_multiplier
-		jump_hold_timer += get_physics_process_delta_time()
-		jump_pressed = true
-	jump_pressed = false
+		can_jump = false
+	elif !jump_buffered:
+		jump_buffered = true
+		jump_buffer_timer.start()
 
 func _physics_process(delta: float) -> void:
 	
@@ -64,17 +59,14 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	
+	
 	if not is_on_floor():
 		velocity.y += current_gravity * delta
-	if jump_pressed and jump_hold_timer < MAX_JUMP_HOLD_TIME:
-		current_gravity = gravity * jumping_multiplier
-	elif jumped:
-		current_gravity = gravity * fast_fall_multiplier
-	else:
-		current_gravity = gravity
+	
 
 	if can_jump == false and is_on_floor():
 		can_jump = true
+		jumped = false
 	
 	if (is_on_floor() == false) and can_jump and $CoyoteTimer.is_stopped():
 		$CoyoteTimer.start()
@@ -95,6 +87,13 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	# touched ground
+	if is_on_floor():
+		if jump_buffered:
+			jump_buffered = false
+			can_jump = true
+			jump()
+
 func take_knockback():
 	knockback_velocity = KNOCKBACK
 	await get_tree().create_timer(0.1).timeout	
@@ -112,3 +111,11 @@ func hurt_animation():
 
 func _on_coyote_timer_timeout() -> void:
 	can_jump = false
+
+func _on_jump_height_timer_timeout() -> void:
+	if !Input.is_action_pressed("Jump"):
+		if velocity.y < -100:
+			velocity.y = -100
+
+func _on_jump_buffer_timer_timeout() -> void:
+	jump_buffered = false

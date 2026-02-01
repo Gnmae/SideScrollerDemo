@@ -1,8 +1,10 @@
 class_name Effect extends Node
 
+@warning_ignore("unused_parameter")
 func increase_stack_amt(amt: int):
 	pass
 
+@warning_ignore("unused_parameter")
 func decrease_stack_amt(amt: int):
 	pass
 

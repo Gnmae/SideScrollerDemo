@@ -4,6 +4,7 @@ extends Node
 @export var player : CharacterBody2D
 
 
+@warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	if $"../StateMachine".current_state.name.to_lower() == "attacking":
 		animation_tree.set("parameters/conditions/attacking", true)

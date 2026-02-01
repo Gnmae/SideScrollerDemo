@@ -8,5 +8,5 @@ var jump_command := JumpCommand.new()
 var parry_command := ParryCommand.new()
 var dash_command := DashCommand.new()
 
-func _init(player: Player) -> void:
-	self.player = player
+func _init(_player: Player) -> void:
+	self.player = _player
