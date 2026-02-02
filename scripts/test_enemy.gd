@@ -20,8 +20,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-func take_damage(amt : float, source: Node):
-	print(str(amt))
+func take_damage(source):
 	hurt_animation()
 	if source.get("timeScale") and source.get("duration"):
 		Globals.frame_freeze(source.timeScale, source.duration)

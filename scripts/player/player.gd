@@ -16,6 +16,8 @@ var can_move : bool = true
 
 var can_jump : bool = false
 var jumped : bool = false
+var air_jumps : int = 1
+var current_air_jumps : int = 1
 var jump_buffered : bool = false
 @onready var jump_buffer_timer = $JumpBufferTimer
 @onready var jump_height_timer = $JumpHeightTimer
@@ -53,6 +55,10 @@ func jump():
 		velocity.y = -JUMP_VELOCITY
 		jumped = true
 		can_jump = false
+	elif jumped:
+		if current_air_jumps > 0:
+			velocity.y = -JUMP_VELOCITY
+			current_air_jumps -= 1
 	elif !jump_buffered:
 		jump_buffered = true
 		jump_buffer_timer.start()
@@ -73,7 +79,6 @@ func _physics_process(delta: float) -> void:
 
 	if can_jump == false and is_on_floor():
 		can_jump = true
-		jumped = false
 	
 	if (is_on_floor() == false) and can_jump and $CoyoteTimer.is_stopped():
 		$CoyoteTimer.start()
@@ -96,6 +101,8 @@ func _physics_process(delta: float) -> void:
 
 	# touched ground
 	if is_on_floor():
+		current_air_jumps = air_jumps
+		jumped = false
 		if jump_buffered:
 			jump_buffered = false
 			can_jump = true

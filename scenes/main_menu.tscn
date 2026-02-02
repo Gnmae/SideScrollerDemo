@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://deyb7nypa3g3k"]
+
+[ext_resource type="Script" uid="uid://d2gb7kn2oi573" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://bo7u5ds8e456r" path="res://assets/backgrounds/conceptart.png" id="2_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://dtwy7cy6aad7g" path="res://assets/player_character_sprites/idle.png" id="3_bqqt6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
+bg_color = Color(0, 0, 0, 0.47058824)
+
+[node name="MainMenu" type="Control" unique_id=474231966]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=2134991529]
+texture_filter = 1
+position = Vector2(288, 213)
+scale = Vector2(1.2277486, 1.2277486)
+texture = ExtResource("2_ekxnf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1427197779]
+texture_filter = 1
+position = Vector2(125, 219)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_bqqt6")
+
+[node name="BoxContainer" type="BoxContainer" parent="." unique_id=1225816463]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BoxContainer" unique_id=49266708]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="BoxContainer/HBoxContainer" unique_id=989775628]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/HBoxContainer/MarginContainer" unique_id=1312597136]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayButton" type="Button" parent="BoxContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1190895129]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="BoxContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=28068618]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="BoxContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=507844108]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Quit Game"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/HBoxContainer" unique_id=255495107]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BoxContainer/HBoxContainer/VBoxContainer" unique_id=1147610050]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_bqqt6")
+text = "Parry Prototype"
+fit_content = true
+horizontal_alignment = 1
+
+[connection signal="pressed" from="BoxContainer/HBoxContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="BoxContainer/HBoxContainer/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

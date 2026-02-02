@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://br8s2pfencfh7" path="res://scripts/state_machine.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://bo0ibaxyi3y8j" path="res://scripts/hurtbox.gd" id="4_fjrip"]
 [ext_resource type="Texture2D" uid="uid://bm8aj6tb8e3gw" path="res://assets/player_character_sprites/dash.png" id="4_oprun"]
+[ext_resource type="PackedScene" uid="uid://viahnexdw43d" path="res://scenes/effect_scenes/red_slash_effect.tscn" id="5_4r5pv"]
 [ext_resource type="Texture2D" uid="uid://dtwy7cy6aad7g" path="res://assets/player_character_sprites/idle.png" id="5_a8ls1"]
 [ext_resource type="Script" uid="uid://i7d5upcbxyi5" path="res://scripts/player_state_machine/player_idle.gd" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://dlb7epp8rlx8i" path="res://scripts/player_state_machine/player_attacking.gd" id="6_tuyoq"]
@@ -16,7 +17,6 @@
 [ext_resource type="AudioStream" uid="uid://dvp5fysy27nim" path="res://assets/sounds/parry_start_sound.wav" id="10_y4r1p"]
 [ext_resource type="AudioStream" uid="uid://cch805ng2ls28" path="res://assets/sounds/whoosh.mp3" id="11_3v2ag"]
 [ext_resource type="Script" uid="uid://2je0o3m32582" path="res://scripts/player/player_animation.gd" id="11_d2wvv"]
-[ext_resource type="PackedScene" uid="uid://map17u4voipg" path="res://scenes/redslashprac_1.tscn" id="11_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://3s5uheobslm" path="res://assets/player_character_sprites/attack_1.png" id="16_fulsm"]
 [ext_resource type="PackedScene" uid="uid://o1grnxkiwyi" path="res://scenes/stats_handler.tscn" id="19_4r5pv"]
 
@@ -476,7 +476,8 @@ shape = SubResource("CapsuleShape2D_fulsm")
 
 [node name="AttackHandler" parent="." unique_id=2033557361 instance=ExtResource("3_qhqgy")]
 unique_name_in_owner = true
-vfx_scene = ExtResource("11_qfm1y")
+
+[node name="RedSlashEffect" parent="." unique_id=1414297839 instance=ExtResource("5_4r5pv")]
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=435328993]
 visible = false

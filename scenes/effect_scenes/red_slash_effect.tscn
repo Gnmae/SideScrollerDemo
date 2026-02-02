@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://viahnexdw43d"]
+
+[ext_resource type="Texture2D" uid="uid://d3s4dcdeyn5ix" path="res://assets/vfx/Pixel Art Animations - Slashes/Slash 1/color2/sprite-sheet.png" id="1_232ft"]
+[ext_resource type="Script" uid="uid://qba0u3bydvjb" path="res://scenes/effect_scenes/red_slash_effect.gd" id="1_ln4e4"]
+
+[sub_resource type="Animation" id="Animation_ln4e4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(4, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_27wv2"]
+resource_name = "down_slash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_232ft"]
+resource_name = "up_slash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d152r"]
+_data = {
+&"RESET": SubResource("Animation_ln4e4"),
+&"down_slash": SubResource("Animation_27wv2"),
+&"up_slash": SubResource("Animation_232ft")
+}
+
+[node name="RedSlashEffect" type="Node2D" unique_id=1414297839]
+script = ExtResource("1_ln4e4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1305193164]
+texture_filter = 1
+texture = ExtResource("1_232ft")
+hframes = 5
+vframes = 2
+frame = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=693082351]
+libraries/ = SubResource("AnimationLibrary_d152r")

@@ -8,8 +8,6 @@ var current_room
 var room1 : String = "uid://b5ycfw1uxfevl"
 
 func _ready() -> void:
-	# setup the room
-	current_room = $RoomRoot
 	load_room(room1)
 
 #--------------------
@@ -42,6 +40,5 @@ func setup_room() -> void:
 func on_exit_body_entered(body : Node2D, scene_uid : String) -> void:
 	if body.is_in_group("Player"):
 		body.can_move = false
-		print(scene_uid)
 		call_deferred("load_room", scene_uid)
 	

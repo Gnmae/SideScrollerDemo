@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.has_method("take_damage"):
-		area.take_damage(dmg, self)
+		area.take_damage(source)
 		self.queue_free()
 
 func parried() -> void:

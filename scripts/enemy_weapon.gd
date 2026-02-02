@@ -2,8 +2,6 @@ extends Node2D
 
 const hitbox_scene = preload("res://scenes/enemy_hitbox.tscn")
 
-@export var dmg : float = 20.0
-
 func do_attack(direction):
 	# make hitbox
 	var hitbox = hitbox_scene.instantiate()
@@ -12,9 +10,7 @@ func do_attack(direction):
 		hitbox.global_position = self.global_position + Vector2(-20, 0)
 	else:
 		hitbox.global_position = self.global_position + Vector2(20, 0)
-	# sets hitbox dmg
-	hitbox.dmg = dmg
-	hitbox.source = get_parent()
+	hitbox.source = %StatsHandler
 	# do attack animation
 	do_anim(direction)
 

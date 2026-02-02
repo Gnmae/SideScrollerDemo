@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://84bemkwdrh8s" path="res://environment_scenes/environment_script.gd" id="1_calqe"]
 [ext_resource type="TileSet" uid="uid://ciiywt3vp1va6" path="res://environment_scenes/temp_tiles.tres" id="2_calqe"]
 [ext_resource type="Script" uid="uid://cj0mhn06n7cfh" path="res://environment_scenes/exit.gd" id="3_1vm7k"]
+[ext_resource type="PackedScene" uid="uid://xoaana6wd66l" path="res://scenes/skeleton.tscn" id="4_row3d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8drh"]
 size = Vector2(60, 146)
@@ -38,5 +39,8 @@ position = Vector2(-961, -91)
 
 [node name="RightPos" type="Node2D" parent="." unique_id=1176545640]
 position = Vector2(1049, -55)
+
+[node name="Skeleton" parent="." unique_id=642849839 instance=ExtResource("4_row3d")]
+position = Vector2(200, -51)
 
 [connection signal="body_entered" from="Exit" to="Exit" method="_on_body_entered"]
