@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d1xahwlq1lgdi"]
 
-[ext_resource type="Texture2D" uid="uid://bon5ht28acplg" path="res://assets/white_rectangle.png" id="1_iywne"]
+[ext_resource type="Script" uid="uid://b7cb8hcjjhgda" path="res://scripts/game_manager.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://b2qesw1ew6088" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://b5ycfw1uxfevl" path="res://environment_scenes/dungeon_start_area.tscn" id="2_lbhrr"]
 [ext_resource type="Script" uid="uid://bf1hrqxa4wn7w" path="res://scripts/ui.gd" id="5_iywne"]
@@ -12,18 +12,11 @@ bg_color = Color(0.6007938, 0, 0.20449537, 1)
 bg_color = Color(0.2, 1, 0.4862745, 1)
 
 [node name="Game" type="Node2D" unique_id=1800550192]
+script = ExtResource("1_lbhrr")
 
-[node name="background" type="Sprite2D" parent="." unique_id=1747731462]
-modulate = Color(0.115677096, 0.05485215, 0.08526818, 1)
-position = Vector2(122.500046, -199.65424)
-scale = Vector2(101.03125, 35.056072)
-texture = ExtResource("1_iywne")
+[node name="RoomRoot" parent="." unique_id=1375964095 instance=ExtResource("2_lbhrr")]
 
-[node name="World2D" type="Node2D" parent="." unique_id=1977502046]
-
-[node name="DungeonStartArea" parent="World2D" unique_id=1414468595 instance=ExtResource("2_lbhrr")]
-
-[node name="Player" parent="World2D" unique_id=941033691 instance=ExtResource("1_uwrxv")]
+[node name="Player" parent="." unique_id=941033691 instance=ExtResource("1_uwrxv")]
 position = Vector2(14, -50)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1034315838]

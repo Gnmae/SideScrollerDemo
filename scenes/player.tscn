@@ -452,6 +452,8 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-256, 49)
 
 [node name="Player" type="CharacterBody2D" unique_id=1293030459 node_paths=PackedStringArray("state_machine") groups=["Player"]]
+z_index = 1
+z_as_relative = false
 script = ExtResource("1_g2els")
 state_machine = NodePath("StateMachine")
 
@@ -558,7 +560,7 @@ wait_time = 0.15
 one_shot = true
 
 [node name="JumpHeightTimer" type="Timer" parent="." unique_id=820485303]
-wait_time = 0.15
+wait_time = 0.1
 one_shot = true
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

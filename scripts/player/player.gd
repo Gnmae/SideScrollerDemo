@@ -4,12 +4,16 @@ class_name Player extends CharacterBody2D
 
 #region movement script variables
 const SPEED = 400.0
-const INITIAL_JUMP_VELOCITY = -500
+const JUMP_VELOCITY = 500.0
 const KNOCKBACK = -200.0
 
 var direction = 1
 var dir_y = 0
+
 var knockback_velocity = 0.0
+
+var can_move : bool = true
+
 var can_jump : bool = false
 var jumped : bool = false
 var jump_buffered : bool = false
@@ -46,7 +50,7 @@ func move(input : Vector2) -> void:
 func jump():
 	if can_jump:
 		jump_height_timer.start()
-		velocity.y = INITIAL_JUMP_VELOCITY
+		velocity.y = -JUMP_VELOCITY
 		jumped = true
 		can_jump = false
 	elif !jump_buffered:
@@ -54,6 +58,9 @@ func jump():
 		jump_buffer_timer.start()
 
 func _physics_process(delta: float) -> void:
+	if !can_move:
+		velocity = Vector2.ZERO
+		return
 	
 	if state_machine.current_state.name.to_lower() == "dashing":
 		move_and_slide()

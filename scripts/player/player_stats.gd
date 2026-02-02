@@ -24,6 +24,10 @@ func take_damage(amt: int, source) -> void:
 		return
 	if target.has_method("take_knockback"):
 		target.take_knockback()
-	var dmg_taken = amt / stats.current_defense
+
+	# integer division in gdscript discards decimal part
+	# which is intended in this case
+	@warning_ignore("integer_division")
+	var dmg_taken = amt / stats.current_defense 
 	var new_health = stats.health - dmg_taken
 	stats._on_health_set(new_health)
