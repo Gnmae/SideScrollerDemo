@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal Killed
+
 var direction : int = 1
 
 var knockback_velocity : float = 0.0
@@ -19,11 +21,6 @@ func _physics_process(delta: float) -> void:
 		$EnemyWeapon.position = Vector2(14, -1)
 	
 	move_and_slide()
-
-func take_damage(source):
-	hurt_animation()
-	if source.get("timeScale") and source.get("duration"):
-		Globals.frame_freeze(source.timeScale, source.duration)
 
 func take_effect(amt : int, effect : Effect):
 	var index = find_effect(effect) # returns -1 if not found
@@ -57,14 +54,5 @@ func activate_effect(effect: Effect):
 	effect.queue_free()
 
 func _on_death():
+	Killed.emit(self)
 	self.queue_free()
-
-func hurt_animation():
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_IN_OUT)
-	self.modulate = Color(6, 6, 6)
-	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.2)
-	tween.tween_property(self, "modulate", Color(2, 2, 2), 0.1)
-	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.2)
-	tween.tween_property(self, "modulate", Color(2, 2, 2), 0.1)
-	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.2)

@@ -1,6 +1,6 @@
 extends Node2D
 
-const hitbox_scene = preload("res://scenes/enemy_hitbox.tscn")
+const hitbox_scene = preload("uid://b35nxgvrkf11h")
 
 func do_attack(direction):
 	# make hitbox

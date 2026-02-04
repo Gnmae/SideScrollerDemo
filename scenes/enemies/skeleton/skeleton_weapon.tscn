@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://70283chaxaxy"]
+[gd_scene format=3 uid="uid://70283chaxaxy"]
 
 [ext_resource type="Script" uid="uid://c8iaey7q8l0dx" path="res://scripts/enemy_weapon.gd" id="1_670s5"]
 [ext_resource type="Texture2D" uid="uid://c3pgmvp6aiv3g" path="res://assets/white_sqaure.png" id="1_yvelt"]
 
-[node name="EnemyWeapon" type="Node2D"]
+[node name="EnemyWeapon" type="Node2D" unique_id=814944915]
 script = ExtResource("1_670s5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1424912390]
 position = Vector2(4.7683716e-07, -26)
 scale = Vector2(0.43750003, 2.5)
 texture = ExtResource("1_yvelt")

@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://xoaana6wd66l"]
 
 [ext_resource type="Script" uid="uid://d16ieatpa6gb8" path="res://scripts/test_enemy.gd" id="1_fpxyv"]
+[ext_resource type="Shader" uid="uid://dvhvceqt0c3ol" path="res://shaders/hit_flash.gdshader" id="2_b36fj"]
 [ext_resource type="Texture2D" uid="uid://b77qmvhfn17cn" path="res://assets/Skeleton_White/Skeleton_With_VFX/Skeleton_01_White_Walk.png" id="2_m1dgl"]
 [ext_resource type="Script" uid="uid://bo0ibaxyi3y8j" path="res://scripts/hurtbox.gd" id="2_mkyue"]
-[ext_resource type="PackedScene" uid="uid://70283chaxaxy" path="res://scenes/enemy_weapon.tscn" id="3_t46gg"]
+[ext_resource type="PackedScene" uid="uid://70283chaxaxy" path="res://scenes/enemies/skeleton/skeleton_weapon.tscn" id="3_t46gg"]
 [ext_resource type="Script" uid="uid://br8s2pfencfh7" path="res://scripts/state_machine.gd" id="4_lkcdx"]
 [ext_resource type="Script" uid="uid://b8u813j30u3cx" path="res://scripts/enemy_state_machine/enemy_idle.gd" id="5_8c00y"]
 [ext_resource type="Script" uid="uid://dinglix0mke55" path="res://scripts/enemy_state_machine/enemy_chasing.gd" id="6_jqw88"]
@@ -13,10 +14,23 @@
 [ext_resource type="AudioStream" uid="uid://cch805ng2ls28" path="res://assets/sounds/whoosh.mp3" id="9_vp4s7"]
 [ext_resource type="Script" uid="uid://bngnoi6xqp0hr" path="res://scripts/parried.gd" id="10_ccqoy"]
 [ext_resource type="Texture2D" uid="uid://du4124uw7xq3t" path="res://assets/Skeleton_White/Skeleton_With_VFX/Skeleton_01_White_Attack1.png" id="13_ausen"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://sccv00c6phxu" path="res://scenes/skeleton_anim_state_machine.tres" id="13_m1dgl"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://sccv00c6phxu" path="res://scenes/enemies/skeleton/skeleton_anim_state_machine.tres" id="13_m1dgl"]
 [ext_resource type="Texture2D" uid="uid://dlyonxryqfvwm" path="res://assets/Skeleton_White/Skeleton_With_VFX/Skeleton_01_White_Idle.png" id="13_q4b65"]
 [ext_resource type="PackedScene" uid="uid://o1grnxkiwyi" path="res://scenes/stats_handler.tscn" id="16_v6rpr"]
-[ext_resource type="Script" uid="uid://bnvuyxwj3e7h8" path="res://scripts/stats.gd" id="17_v6rpr"]
+[ext_resource type="Script" uid="uid://bnvuyxwj3e7h8" path="res://scripts/stats.gd" id="18_yjy0a"]
+
+[sub_resource type="Resource" id="Resource_pewhb"]
+resource_local_to_scene = true
+script = ExtResource("18_yjy0a")
+base_max_health = 50
+base_attack = 5
+faction = 1
+metadata/_custom_type_script = "uid://bnvuyxwj3e7h8"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adimu"]
+shader = ExtResource("2_b36fj")
+shader_parameter/hit_flash_color = Color(1, 1, 1, 1)
+shader_parameter/hit_flash_on = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mkyue"]
 size = Vector2(25, 46)
@@ -199,6 +213,7 @@ _data = {
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_q4b65"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ausen"]
+graph_offset = Vector2(67.5, 5.200001)
 nodes/output/position = Vector2(580, 140)
 nodes/EnemyState/node = ExtResource("13_m1dgl")
 nodes/EnemyState/position = Vector2(80, 120)
@@ -206,36 +221,8 @@ nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_q4b65")
 nodes/TimeScale/position = Vector2(400, 120)
 node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"EnemyState"]
 
-[sub_resource type="Resource" id="Resource_v6rpr"]
-resource_local_to_scene = true
-script = ExtResource("17_v6rpr")
-base_attack = 5
-faction = 1
-metadata/_custom_type_script = "uid://bnvuyxwj3e7h8"
-
-[node name="Skeleton" type="CharacterBody2D" unique_id=642849839]
+[node name="Skeleton" type="CharacterBody2D" unique_id=642849839 groups=["Enemy"]]
 script = ExtResource("1_fpxyv")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=319657665]
-texture_filter = 1
-texture = ExtResource("2_m1dgl")
-hframes = 10
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1504981636]
-position = Vector2(-1.5, 9)
-shape = SubResource("RectangleShape2D_mkyue")
-
-[node name="EnemyWeapon" parent="." unique_id=1705720724 instance=ExtResource("3_t46gg")]
-visible = false
-position = Vector2(12, 0)
-
-[node name="Hurtbox" type="Area2D" parent="." unique_id=104782618]
-script = ExtResource("2_mkyue")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1424993761]
-position = Vector2(-1.5, 9)
-shape = SubResource("RectangleShape2D_h17bh")
-debug_color = Color(0.98338693, 0, 0.35783058, 0.41960785)
 
 [node name="StateMachine" type="Node" parent="." unique_id=1109154398 node_paths=PackedStringArray("initial_state")]
 unique_name_in_owner = true
@@ -260,14 +247,41 @@ script = ExtResource("9_hsgsh")
 [node name="Parried" type="Node" parent="StateMachine" unique_id=501702812]
 script = ExtResource("10_ccqoy")
 
-[node name="AttackSound" type="AudioStreamPlayer2D" parent="." unique_id=287924517]
-stream = ExtResource("9_vp4s7")
-pitch_scale = 0.5
-
 [node name="EnemyAnimation" type="Node" parent="." unique_id=901943169 node_paths=PackedStringArray("enemy", "animation_tree")]
 script = ExtResource("9_dddk1")
 enemy = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
+
+[node name="StatsHandler" parent="." unique_id=879032711 node_paths=PackedStringArray("target") instance=ExtResource("16_v6rpr")]
+unique_name_in_owner = true
+stats = SubResource("Resource_pewhb")
+target = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=319657665]
+texture_filter = 1
+material = SubResource("ShaderMaterial_adimu")
+texture = ExtResource("2_m1dgl")
+hframes = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1504981636]
+position = Vector2(-1.5, 9)
+shape = SubResource("RectangleShape2D_mkyue")
+
+[node name="EnemyWeapon" parent="." unique_id=1705720724 instance=ExtResource("3_t46gg")]
+visible = false
+position = Vector2(12, 0)
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=104782618]
+script = ExtResource("2_mkyue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1424993761]
+position = Vector2(-1.5, 9)
+shape = SubResource("RectangleShape2D_h17bh")
+debug_color = Color(0.98338693, 0, 0.35783058, 0.41960785)
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="." unique_id=287924517]
+stream = ExtResource("9_vp4s7")
+pitch_scale = 0.5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1284578189]
 libraries/ = SubResource("AnimationLibrary_vp4s7")
@@ -279,8 +293,3 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/EnemyState/conditions/attacking = false
 parameters/EnemyState/conditions/parried = false
 parameters/TimeScale/scale = 1.0
-
-[node name="StatsHandler" parent="." unique_id=879032711 node_paths=PackedStringArray("target") instance=ExtResource("16_v6rpr")]
-unique_name_in_owner = true
-stats = SubResource("Resource_v6rpr")
-target = NodePath("..")

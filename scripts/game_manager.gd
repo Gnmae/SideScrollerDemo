@@ -2,6 +2,7 @@ extends Node2D
 
 var levels = []
 var current_room
+var transition_time : float = 1.0
 
 @onready var player : Player = get_tree().get_first_node_in_group("Player")
 
@@ -27,12 +28,28 @@ func load_room(room_scene_uid: String) -> void:
 	
 
 func setup_room() -> void:
+	%FadeToBlackObject.color = Color(0, 0, 0, 1.0)
 	# connect exit
-	var exit = current_room.get_node_or_null("Exit")
+	var exit = current_room.get_node_or_null("ExitArea")
 	if exit:
 		exit.Exit_Triggered.connect(on_exit_body_entered)
+	# connect enemy killed signals
+	if current_room.has_method("update_enemy_count"):
+		var enemies = current_room.update_enemy_count()
+		for enemy in enemies:
+			enemy.Killed.connect(on_enemy_death)
+	# set room reward
+	var reward_scene = load("uid://brxpjoopqn76u") # replace
+	current_room.reward_scene = reward_scene
 	
+	
+	# fades from black and allow player to move
+	var tween = get_tree().create_tween()
+	tween.tween_property(%FadeToBlackObject, "color", Color(0, 0, 0, 0.0), transition_time)
+	await tween.finished
 	player.can_move = true
+	
+
 
 #--------------------
 # SIGNAL HANDLERS
@@ -42,3 +59,6 @@ func on_exit_body_entered(body : Node2D, scene_uid : String) -> void:
 		body.can_move = false
 		call_deferred("load_room", scene_uid)
 	
+
+func on_enemy_death(enemy):
+	current_room.update_enemy_count(enemy)

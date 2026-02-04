@@ -5,6 +5,8 @@ extends Node
 @export var stats : Stats
 @export var target : CharacterBody2D
 
+var hit_flash_time : float = 0.1
+
 func _ready() -> void:
 	stats.health_depleted.connect(_on_health_depleted)
 
@@ -33,5 +35,12 @@ func take_damage(source) -> void:
 	var dmg_taken = source.stats.current_attack / (1 + (stats.current_defense/100))
 	if dmg_taken <= 0:
 		dmg_taken = 1
+	Globals.create_damage_label(str(dmg_taken), target.position)
+	
 	var new_health = stats.health - dmg_taken
 	stats._on_health_set(new_health)
+	
+	#play hitflash
+	if target.is_in_group("Enemy"):
+		Globals.hitflash($"../Sprite2D".material, 1)
+	

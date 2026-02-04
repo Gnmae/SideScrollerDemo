@@ -4,7 +4,7 @@ extends Node
 @export var animation_tree: AnimationTree
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if $"../StateMachine".current_state.name.to_lower() == "attacking":
 		animation_tree.set("parameters/EnemyState/conditions/attacking", true)
 		return

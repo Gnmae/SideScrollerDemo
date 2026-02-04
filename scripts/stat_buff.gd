@@ -8,6 +8,7 @@ enum BuffType {
 @export var stat: Stats.BuffableStats
 @export var buff_amount: float
 @export var buff_type: BuffType
+@export var description : String
 
 func _init(_stat: Stats.BuffableStats = Stats.BuffableStats.MAX_HEALTH, _buff_amount: float = 1.0,
 		_buff_type: StatBuff.BuffType = BuffType.MULTIPLY) -> void:

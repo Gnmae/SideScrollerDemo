@@ -8,5 +8,6 @@ func _ready() -> void:
 
 @warning_ignore("unused_parameter")
 func _on_player_health_changed(health, max_health) -> void:
-	%HealthBar.max_value = player_stats.current_max_health
-	%HealthBar.value = player_stats.health
+	%HealthBar.max_value = max_health
+	%HealthBar.value = health
+	%HealthBar/Label.text = str(health) + "/" + str(max_health)

@@ -6,23 +6,19 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vqle3"]
 texture = ExtResource("1_1bn2b")
-texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 0, 16, 0, 16, -16)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 0, 8, 0, 8, -8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jghob"]
 texture = ExtResource("2_stkkw")
-texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d6v0s"]
 texture = ExtResource("3_uyrl1")
-texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
 [resource]
-tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vqle3")
 sources/1 = SubResource("TileSetAtlasSource_jghob")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StatBuff" format=3 uid="uid://2ofknp88xk0g"]
+
+[ext_resource type="Script" uid="uid://cparpbcwd2o1k" path="res://scripts/stat_buff.gd" id="1_atqr2"]
+
+[resource]
+script = ExtResource("1_atqr2")
+stat = 2
+buff_amount = 20.0
+buff_type = 1
+description = "Adds 20 to Attack"
+metadata/_custom_type_script = "uid://cparpbcwd2o1k"

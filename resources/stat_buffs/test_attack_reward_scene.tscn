@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://brxpjoopqn76u"]
+
+[ext_resource type="Script" uid="uid://d13acwd5opxtb" path="res://resources/stat_buffs/reward.gd" id="1_plew6"]
+[ext_resource type="Texture2D" uid="uid://tkjcc8lx3eff" path="res://assets/placeholder_relic_sprite.png" id="1_t4ll8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t4ll8"]
+radius = 14.0
+
+[node name="TestAttackRewardScene" type="Node2D" unique_id=964461814]
+script = ExtResource("1_plew6")
+reward_uid = "uid://2ofknp88xk0g"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=681771705]
+texture_filter = 1
+texture = ExtResource("1_t4ll8")
+
+[node name="CollectionArea" type="Area2D" parent="." unique_id=845860568]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea" unique_id=987025192]
+shape = SubResource("CircleShape2D_t4ll8")

@@ -552,6 +552,7 @@ target = NodePath("..")
 [node name="ControllerContainer" type="Node" parent="." unique_id=412280458]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=350414027]
+offset = Vector2(0, -20)
 
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=79661050]
 wait_time = 0.1

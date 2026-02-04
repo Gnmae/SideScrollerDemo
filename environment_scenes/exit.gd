@@ -4,5 +4,8 @@ class_name ExitArea extends Area2D
 
 signal Exit_Triggered
 
+func _ready() -> void:
+	body_entered.connect(_on_body_entered)
+
 func _on_body_entered(body: Node2D) -> void:
 	Exit_Triggered.emit(body, next_area)

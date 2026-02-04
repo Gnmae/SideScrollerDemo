@@ -24,6 +24,7 @@ var jump_buffered : bool = false
 
 var gravity : float = 1500.0
 var current_gravity : float = gravity
+var fast_fall_multiplier : float = 1.15
 
 #region input/controller related variables
 @onready var controller_container = $ControllerContainer
@@ -72,9 +73,10 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	
-	
 	if not is_on_floor():
 		velocity.y += current_gravity * delta
+	if not is_on_floor() and velocity.y >= 0 and jumped:
+		velocity.y += current_gravity * delta * fast_fall_multiplier
 	
 
 	if can_jump == false and is_on_floor():
@@ -112,16 +114,6 @@ func take_knockback():
 	knockback_velocity = KNOCKBACK
 	await get_tree().create_timer(0.1).timeout	
 	knockback_velocity = 0
-
-func hurt_animation():
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_IN_OUT)
-	self.modulate = Color(6, 6, 6)
-	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.2)
-	tween.tween_property(self, "modulate", Color(2, 2, 2), 0.1)
-	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.2)
-	tween.tween_property(self, "modulate", Color(2, 2, 2), 0.1)
-	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.2)
 
 func _on_coyote_timer_timeout() -> void:
 	can_jump = false
