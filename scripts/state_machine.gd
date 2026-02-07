@@ -5,6 +5,8 @@ extends Node
 var current_state : State
 var states : Dictionary = {}
 
+signal StateChanged
+
 func _ready() -> void:
 	for child in get_children():
 		if child is State:
@@ -37,3 +39,4 @@ func on_child_transition(state, new_state_name):
 	new_state.Enter()
 	
 	current_state = new_state
+	StateChanged.emit(current_state)

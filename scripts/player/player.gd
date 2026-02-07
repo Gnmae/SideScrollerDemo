@@ -26,12 +26,20 @@ var gravity : float = 1500.0
 var current_gravity : float = gravity
 var fast_fall_multiplier : float = 1.15
 
+var slow_multiplier : float = 1.0
+const ATTACK_SLOW : float = 0.5
+
 #region input/controller related variables
 @onready var controller_container = $ControllerContainer
 
 var controller : PlayerController
 var horizontal_input
 var vertical_input
+
+#region signals
+signal PlayerJumped
+signal PlayerFalling
+signal PlayerGrounded
 
 #region functions
 
@@ -52,12 +60,14 @@ func move(input : Vector2) -> void:
 
 func jump():
 	if can_jump:
+		PlayerJumped.emit()
 		jump_height_timer.start()
 		velocity.y = -JUMP_VELOCITY
 		jumped = true
 		can_jump = false
 	elif jumped:
 		if current_air_jumps > 0:
+			PlayerJumped.emit()
 			velocity.y = -JUMP_VELOCITY
 			current_air_jumps -= 1
 	elif !jump_buffered:
@@ -77,6 +87,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y += current_gravity * delta
 	if not is_on_floor() and velocity.y >= 0 and jumped:
 		velocity.y += current_gravity * delta * fast_fall_multiplier
+		PlayerFalling.emit()
 	
 
 	if can_jump == false and is_on_floor():
@@ -88,7 +99,13 @@ func _physics_process(delta: float) -> void:
 	if horizontal_input:
 		if state_machine.current_state.name.to_lower() != "attacking":
 			direction = horizontal_input # update facing direction
-		velocity.x = horizontal_input * SPEED
+			slow_multiplier = 1.0
+		else:
+			slow_multiplier = ATTACK_SLOW
+		if knockback_velocity:
+			velocity.x = knockback_velocity
+		else:
+			velocity.x = horizontal_input * SPEED * slow_multiplier
 	else:
 		velocity.x = 0 + knockback_velocity
 	
@@ -103,6 +120,7 @@ func _physics_process(delta: float) -> void:
 
 	# touched ground
 	if is_on_floor():
+		PlayerGrounded.emit()
 		current_air_jumps = air_jumps
 		jumped = false
 		if jump_buffered:
@@ -112,7 +130,7 @@ func _physics_process(delta: float) -> void:
 
 func take_knockback():
 	knockback_velocity = KNOCKBACK
-	await get_tree().create_timer(0.1).timeout	
+	await get_tree().create_timer(0.1).timeout
 	knockback_velocity = 0
 
 func _on_coyote_timer_timeout() -> void:

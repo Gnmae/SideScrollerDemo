@@ -7,7 +7,7 @@ var source
 @export var duration : float = 0.02
 
 func _ready() -> void:
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(duration).timeout
 	self.queue_free()
 
 func _on_area_entered(area: Area2D) -> void:
