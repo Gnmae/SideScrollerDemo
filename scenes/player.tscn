@@ -343,6 +343,8 @@ one_shot = true
 [node name="Parrying" type="Node" parent="StateMachine" unique_id=1574354593]
 script = ExtResource("8_smehm")
 
+[node name="ParryTimer" type="Timer" parent="StateMachine/Parrying" unique_id=1571105806]
+
 [node name="Dashing" type="Node" parent="StateMachine" unique_id=2078840237 node_paths=PackedStringArray("player")]
 script = ExtResource("9_jej6c")
 player = NodePath("../..")

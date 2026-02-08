@@ -14,7 +14,7 @@ reward_uid = "uid://2ofknp88xk0g"
 texture_filter = 1
 texture = ExtResource("1_t4ll8")
 
-[node name="CollectionArea" type="Area2D" parent="." unique_id=845860568]
+[node name="InteractArea" type="Area2D" parent="." unique_id=845860568]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea" unique_id=987025192]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=987025192]
 shape = SubResource("CircleShape2D_t4ll8")

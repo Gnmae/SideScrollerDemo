@@ -21,3 +21,6 @@ func _physics_process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("open_menu"):
 		Globals.toggle_options()
+	
+	if Input.is_action_just_pressed("move_up"):
+		interact_command.execute(player)

@@ -41,6 +41,9 @@ signal PlayerJumped
 signal PlayerFalling
 signal PlayerGrounded
 
+#region interactables
+var interactables : Array[Interactable]
+
 #region functions
 
 func _ready() -> void:
@@ -53,6 +56,10 @@ func set_controller(_controller : PlayerController) -> void:
 	
 	controller = _controller
 	controller_container.add_child(controller)
+
+func interact():
+	if interactables.size() > 0:
+		interactables[0].interact(self) # most recently pushed interactable
 
 func move(input : Vector2) -> void:
 	horizontal_input = input.x
