@@ -14,6 +14,15 @@ left_pos = NodePath("LeftPos")
 right_pos = NodePath("RightPos")
 metadata/_custom_type_script = "uid://84bemkwdrh8s"
 
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1525283202]
+rotation = -0.6719518
+color = Color(0, 1, 1, 1)
+energy = 0.1
+shadow_enabled = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=78337000]
+color = Color(0.29803923, 0.29803923, 0.29803923, 1)
+
 [node name="TileMap" type="Node2D" parent="." unique_id=1176921444]
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="TileMap" unique_id=134009951]

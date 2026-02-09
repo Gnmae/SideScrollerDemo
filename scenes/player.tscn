@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://r5afsru6yn53" path="res://scripts/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dwp5lw6f75qcp" path="res://assets/template_free/male_hero_template.png" id="2_oprun"]
+[ext_resource type="PackedScene" uid="uid://dra2uf2nem1sy" path="res://scenes/fairy_light.tscn" id="2_qfm1y"]
 [ext_resource type="PackedScene" uid="uid://y2ur6tkd6fec" path="res://scenes/attack_handler.tscn" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://br8s2pfencfh7" path="res://scripts/state_machine.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://bo0ibaxyi3y8j" path="res://scripts/hurtbox.gd" id="4_fjrip"]
@@ -264,7 +265,6 @@ input_8/reset = true
 animation = &"attack_up"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_i4ail"]
-graph_offset = Vector2(-908.2379, -11.744308)
 nodes/output/position = Vector2(660, 0)
 nodes/AnimationNodeStateMachine/node = ExtResource("15_a8ls1")
 nodes/AnimationNodeStateMachine/position = Vector2(-2040, 100)
@@ -295,6 +295,8 @@ z_index = 1
 z_as_relative = false
 script = ExtResource("1_g2els")
 state_machine = NodePath("StateMachine")
+
+[node name="FairyLight" parent="." unique_id=745827655 instance=ExtResource("2_qfm1y")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=211691440]
 texture_filter = 1

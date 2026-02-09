@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dra2uf2nem1sy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ppycn"]
+
+[sub_resource type="Gradient" id="Gradient_ppycn"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.15625, 0.7235577)
+colors = PackedColorArray(1, 0, 0, 1, 0.4117647, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hnswa"]
+gradient = SubResource("Gradient_ppycn")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="FairyLight" type="CharacterBody2D" unique_id=745827655]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=644111510]
+shape = SubResource("CircleShape2D_ppycn")
+disabled = true
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=513922584]
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_hnswa")

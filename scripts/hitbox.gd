@@ -16,6 +16,7 @@ func _on_area_entered(area: Area2D) -> void:
 		if area.has_method("take_effect"):
 			area.take_effect(1, create_effect())
 		get_tree().get_first_node_in_group("Player").take_knockback()
+		self.queue_free()
 
 func create_effect():
 	var new_effect = trick_effect.instantiate()

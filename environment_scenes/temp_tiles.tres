@@ -9,9 +9,13 @@ texture = ExtResource("1_1bn2b")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 0, 8, 0, 8, -8)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1bn2b"]
+polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jghob"]
 texture = ExtResource("2_stkkw")
 0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1bn2b")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d6v0s"]
@@ -19,6 +23,7 @@ texture = ExtResource("3_uyrl1")
 0:0/0 = 0
 
 [resource]
+occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vqle3")
 sources/1 = SubResource("TileSetAtlasSource_jghob")

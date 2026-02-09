@@ -4,7 +4,7 @@ var source
 
 @export var dmg : float = 0.0
 @export var timeScale : float = 0.05
-@export var duration : float = 0.02
+@export var duration : float = 0.1
 
 func _ready() -> void:
 	await get_tree().create_timer(duration).timeout
