@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://bi7nueyq3bnkh" path="res://scripts/enemy_state_machine/enemy_attacking.gd" id="7_1y3pe"]
 [ext_resource type="Script" uid="uid://bauv1ijhod0mc" path="res://scripts/enemy_animation.gd" id="9_dddk1"]
 [ext_resource type="Script" uid="uid://st6nl2uuyv25" path="res://scripts/enemy_wait.gd" id="9_hsgsh"]
-[ext_resource type="AudioStream" uid="uid://cch805ng2ls28" path="res://assets/sounds/whoosh.mp3" id="9_vp4s7"]
 [ext_resource type="Script" uid="uid://bngnoi6xqp0hr" path="res://scripts/parried.gd" id="10_ccqoy"]
 [ext_resource type="Texture2D" uid="uid://du4124uw7xq3t" path="res://assets/Skeleton_White/Skeleton_With_VFX/Skeleton_01_White_Attack1.png" id="13_ausen"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://sccv00c6phxu" path="res://scenes/enemies/skeleton/skeleton_anim_state_machine.tres" id="13_m1dgl"]
@@ -19,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://o1grnxkiwyi" path="res://scenes/stats_handler.tscn" id="16_v6rpr"]
 [ext_resource type="Script" uid="uid://bnvuyxwj3e7h8" path="res://scripts/stats.gd" id="18_yjy0a"]
 
-[sub_resource type="Resource" id="Resource_pewhb"]
+[sub_resource type="Resource" id="Resource_wkpb5"]
 resource_local_to_scene = true
 script = ExtResource("18_yjy0a")
 base_max_health = 50
@@ -254,7 +253,7 @@ animation_tree = NodePath("../AnimationTree")
 
 [node name="StatsHandler" parent="." unique_id=879032711 node_paths=PackedStringArray("target") instance=ExtResource("16_v6rpr")]
 unique_name_in_owner = true
-stats = SubResource("Resource_pewhb")
+stats = SubResource("Resource_wkpb5")
 target = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=319657665]
@@ -279,10 +278,6 @@ position = Vector2(-1.5, 9)
 shape = SubResource("RectangleShape2D_h17bh")
 debug_color = Color(0.98338693, 0, 0.35783058, 0.41960785)
 
-[node name="AttackSound" type="AudioStreamPlayer2D" parent="." unique_id=287924517]
-stream = ExtResource("9_vp4s7")
-pitch_scale = 0.5
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1284578189]
 libraries/ = SubResource("AnimationLibrary_vp4s7")
 
@@ -293,3 +288,6 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/EnemyState/conditions/attacking = false
 parameters/EnemyState/conditions/parried = false
 parameters/TimeScale/scale = 1.0
+
+[node name="AudioManager" type="Node2D" parent="." unique_id=1997844058]
+unique_name_in_owner = true

@@ -6,12 +6,15 @@ var source
 var timeScale : float = 0.05
 var duration : float = 0.3
 
+signal Hit
+
 func _ready() -> void:
 	await get_tree().create_timer(0.2).timeout
 	self.queue_free()
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.has_method("take_damage"):
+		Hit.emit()
 		area.take_damage(source)
 		if area.has_method("take_effect"):
 			area.take_effect(1, create_effect())

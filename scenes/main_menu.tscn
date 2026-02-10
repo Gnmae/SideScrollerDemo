@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bo7u5ds8e456r" path="res://assets/backgrounds/conceptart.png" id="2_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://dtwy7cy6aad7g" path="res://assets/player_character_sprites/idle.png" id="3_bqqt6"]
 [ext_resource type="Theme" uid="uid://cotg51a3adfwx" path="res://themes/main_theme.tres" id="4_wu84c"]
+[ext_resource type="AudioStream" uid="uid://2udfqntr0f2j" path="res://audio/sounds/lightswitch.wav" id="5_8ln24"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
 bg_color = Color(0, 0, 0, 0.49019608)
@@ -87,5 +88,9 @@ text = "Parry Prototype"
 fit_content = true
 horizontal_alignment = 1
 
+[node name="ClickSound" type="AudioStreamPlayer2D" parent="." unique_id=1004982150]
+stream = ExtResource("5_8ln24")
+
 [connection signal="pressed" from="BoxContainer/HBoxContainer/MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="BoxContainer/HBoxContainer/MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="BoxContainer/HBoxContainer/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

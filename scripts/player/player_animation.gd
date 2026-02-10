@@ -5,29 +5,58 @@ extends Node
 
 var dir_locked : bool = false
 
+var idle : int = 0
+var running : int = 1
+var falling : int = 2
+var jumping : int = 3
+var non_idle : int = 4
+
+var states : Dictionary = {
+	idle : "Idle",
+	running : "Running",
+	falling : "Falling",
+	jumping : "Jumping",
+	non_idle : "non-idle"
+}
+
+var current_state : String
+
 @warning_ignore("unused_parameter")
 func _ready() -> void:
-	# connect signals for anim changes
-	%StateMachine.StateChanged.connect(on_state_changed)
-	player.PlayerJumped.connect(on_player_jumped)
-	player.PlayerFalling.connect(on_player_falling)
-	player.PlayerGrounded.connect(on_player_grounded)
-	
-	# set base anims for no input
-	var y_dir = player.velocity.normalized().y
-	if y_dir > 0:
-		animation_tree.set("parameters/Transition/transition_request", "Falling")
-	elif y_dir < 0:
-		animation_tree.set("parameters/Transition/transition_request", "Jumping")
-	else:
-		animation_tree.set("parameters/Transition/transition_request", "Idle")
+	current_state = states[idle]
+	#print(current_state)
+	## connect signals for anim changes
+	#%StateMachine.StateChanged.connect(on_state_changed)
+	#player.PlayerJumped.connect(on_player_jumped)
+	#player.PlayerFalling.connect(on_player_falling)
+	#player.PlayerGrounded.connect(on_player_grounded)
+	#
+	## set base anims for no input
+	#var y_dir = player.velocity.normalized().y
+	#if y_dir > 0:
+		#animation_tree.set("parameters/Transition/transition_request", "Falling")
+	#elif y_dir < 0:
+		#animation_tree.set("parameters/Transition/transition_request", "Jumping")
+	#else:
+		#animation_tree.set("parameters/Transition/transition_request", "Idle")
 
 func _process(_delta: float) -> void:
 	if !dir_locked:
 		set_dir()
-	if player.velocity.normalized().x and %StateMachine.current_state.name.to_lower() == "idle" and player.velocity.normalized().y == 0:
-		animation_tree.set("parameters/Transition/transition_request", "Running")
-
+	#if current_state != states[non_idle]:
+		#if animation_tree.get("parameters/Transition/current_state") != current_state:
+			#animation_tree.set("parameters/Transition/transition_request", current_state)
+		#if player.is_on_floor():
+			#if player.velocity.x:
+				#current_state = states[running]
+			#else:
+				#current_state = states[idle]
+		#else:
+			#if player.velocity.y > 0:
+				#current_state = states[jumping]
+			#else:
+				#current_state = states[falling]
+	#
 
 
 func set_idle_anims(state : State) -> void:
@@ -45,8 +74,9 @@ func set_idle_anims(state : State) -> void:
 
 func on_state_changed(state: State):
 	if state.name.to_lower() == "idle":
-		set_idle_anims(state)
+		dir_locked = false
 		return
+	current_state = states[non_idle]
 	dir_locked = true
 	if state.name.to_lower() == "attacking":
 		animation_tree.set("parameters/Transition/transition_request", $"../StateMachine/Attacking".current_attack)
@@ -64,16 +94,13 @@ func set_dir():
 
 
 func on_player_jumped():
-	if %StateMachine.current_state.name.to_lower() != "idle":
-		return
-	animation_tree.set("parameters/Transition/transition_request", "Jumping")
+	if current_state != states[non_idle]:
+		current_state = states[jumping]
 
 func on_player_falling():
-	if %StateMachine.current_state.name.to_lower() != "idle":
-		return
-	animation_tree.set("parameters/Transition/transition_request", "Falling")
+	if current_state != states[non_idle]:
+		current_state = states[falling]
 
 func on_player_grounded():
-	if %StateMachine.current_state.name.to_lower() != "idle":
-		return
-	animation_tree.set("parameters/Transition/transition_request", "Idle")
+	if current_state != states[non_idle]:
+		current_state = states[jumping]

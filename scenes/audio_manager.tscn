@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://s0aer48hiu8y"]
+
+[ext_resource type="Script" uid="uid://c3e4ihlx0fg50" path="res://globals/audio_manager.gd" id="1_8qd8g"]
+[ext_resource type="Script" uid="uid://benh33t3co8er" path="res://scripts/sound_effect.gd" id="2_liach"]
+[ext_resource type="Resource" uid="uid://b0mcif4bqxdfg" path="res://audio/sound_effect_resources/footstep.tres" id="3_3asnw"]
+
+[node name="AudioManager" type="Node2D" unique_id=500479069]
+script = ExtResource("1_8qd8g")
+sound_effects = Array[ExtResource("2_liach")]([ExtResource("3_3asnw")])

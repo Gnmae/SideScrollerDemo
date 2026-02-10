@@ -28,6 +28,7 @@ var fast_fall_multiplier : float = 1.15
 
 var slow_multiplier : float = 1.0
 const ATTACK_SLOW : float = 0.5
+#endregion
 
 #region input/controller related variables
 @onready var controller_container = $ControllerContainer
@@ -39,7 +40,7 @@ var vertical_input
 #region signals
 signal PlayerJumped
 signal PlayerFalling
-signal PlayerGrounded
+var player_running : bool = false
 
 #region interactables
 var interactables : Array[Interactable]
@@ -127,7 +128,6 @@ func _physics_process(delta: float) -> void:
 
 	# touched ground
 	if is_on_floor():
-		PlayerGrounded.emit()
 		current_air_jumps = air_jumps
 		jumped = false
 		if jump_buffered:

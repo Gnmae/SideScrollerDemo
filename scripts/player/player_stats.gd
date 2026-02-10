@@ -20,11 +20,13 @@ func _on_health_depleted():
 func take_damage(source) -> void:
 	if %StateMachine.current_state.name.to_lower() == "parrying":
 		%StateMachine.current_state.parry_success(source)
-		$"../Sounds/ParrySuccessful".play(0.7)
-		source.target.parried()
-		Globals.frame_freeze(0.05, 0.4)
+		#$"../Sounds/ParrySuccessful".play(0.7)
+		#source.target.parried()
+		#Globals.frame_freeze(0.05, 0.4)
 		return
 	
+	if %AudioManager.has_method("play_hurt_sound"):
+		%AudioManager.play_hurt_sound()
 	Globals.frame_freeze(0.05, 0.2)
 	
 	if target.has_method("take_knockback"):

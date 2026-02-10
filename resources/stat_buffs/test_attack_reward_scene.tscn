@@ -9,6 +9,7 @@ radius = 14.0
 [node name="TestAttackRewardScene" type="Node2D" unique_id=964461814]
 script = ExtResource("1_plew6")
 reward_uid = "uid://2ofknp88xk0g"
+reward_text = "Increases Attack by 20"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=681771705]
 texture_filter = 1

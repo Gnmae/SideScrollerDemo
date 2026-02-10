@@ -6,17 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://y2ur6tkd6fec" path="res://scenes/attack_handler.tscn" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://br8s2pfencfh7" path="res://scripts/state_machine.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://bo0ibaxyi3y8j" path="res://scripts/hurtbox.gd" id="4_fjrip"]
-[ext_resource type="PackedScene" uid="uid://viahnexdw43d" path="res://scenes/effect_scenes/red_slash_effect.tscn" id="5_4r5pv"]
 [ext_resource type="Script" uid="uid://i7d5upcbxyi5" path="res://scripts/player_state_machine/player_idle.gd" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://dlb7epp8rlx8i" path="res://scripts/player_state_machine/player_attacking.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://0gv48bjoqmvt" path="res://scripts/player_state_machine/parrying.gd" id="8_smehm"]
 [ext_resource type="Script" uid="uid://dpmus3yi600tc" path="res://scripts/dashing.gd" id="9_jej6c"]
-[ext_resource type="AudioStream" uid="uid://dax46ksygb3tp" path="res://assets/sounds/parry_sound.wav" id="9_ur7pv"]
-[ext_resource type="AudioStream" uid="uid://dvp5fysy27nim" path="res://assets/sounds/parry_start_sound.wav" id="10_y4r1p"]
-[ext_resource type="AudioStream" uid="uid://cch805ng2ls28" path="res://assets/sounds/whoosh.mp3" id="11_3v2ag"]
 [ext_resource type="Script" uid="uid://2je0o3m32582" path="res://scripts/player/player_animation.gd" id="11_d2wvv"]
+[ext_resource type="Script" uid="uid://dx47m243qpdlx" path="res://scripts/audio_manager.gd" id="14_f1ej7"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bi5m0746nni1s" path="res://player_animation_state_machine.tres" id="15_a8ls1"]
+[ext_resource type="AudioStream" uid="uid://nhpxrx4swyvw" path="res://audio/sounds/walking_step_sound.wav" id="15_oprun"]
+[ext_resource type="AudioStream" uid="uid://cjwneh3iupkbc" path="res://audio/sounds/jump.wav" id="16_a8ls1"]
+[ext_resource type="AudioStream" uid="uid://iahuppq1h0dc" path="res://audio/sounds/swordwoosh.wav" id="17_qfm1y"]
+[ext_resource type="AudioStream" uid="uid://dvp5fysy27nim" path="res://audio/sounds/parry_start_sound.wav" id="18_fulsm"]
 [ext_resource type="PackedScene" uid="uid://o1grnxkiwyi" path="res://scenes/stats_handler.tscn" id="19_4r5pv"]
+[ext_resource type="AudioStream" uid="uid://h57gxrpgqj8w" path="res://audio/sounds/player_hurt_sound.wav" id="19_60mlk"]
+[ext_resource type="AudioStream" uid="uid://2udfqntr0f2j" path="res://audio/sounds/lightswitch.wav" id="20_60mlk"]
+[ext_resource type="AudioStream" uid="uid://cvwnjkn26e2w2" path="res://audio/sounds/dash.wav" id="21_i4ail"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fulsm"]
 radius = 9.0
@@ -103,6 +107,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [Vector2i(0, 3)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%AudioManager")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_dash_sound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_fulsm"]
 resource_name = "falling"
@@ -183,6 +201,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3), Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3), Vector2i(7, 3), Vector2i(8, 3), Vector2i(9, 3)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AudioManager")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.099999994, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep_sound"
+}, {
+"args": [],
+"method": &"play_footstep_sound"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d2wvv"]
@@ -265,9 +300,9 @@ input_8/reset = true
 animation = &"attack_up"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_i4ail"]
-nodes/output/position = Vector2(660, 0)
+nodes/output/position = Vector2(-1080, 120)
 nodes/AnimationNodeStateMachine/node = ExtResource("15_a8ls1")
-nodes/AnimationNodeStateMachine/position = Vector2(-2040, 100)
+nodes/AnimationNodeStateMachine/position = Vector2(-1580, 80)
 nodes/Transition/node = SubResource("AnimationNodeTransition_ujl30")
 nodes/Transition/position = Vector2(100, -60)
 nodes/attack_up/node = SubResource("AnimationNodeAnimation_31cv2")
@@ -288,7 +323,7 @@ nodes/Animation/position = Vector2(-320, -140)
 "nodes/Animation 7/position" = Vector2(-320, 180)
 "nodes/Animation 8/node" = SubResource("AnimationNodeAnimation_qfm1y")
 "nodes/Animation 8/position" = Vector2(-200, 40)
-node_connections = [&"output", 0, &"Transition", &"Transition", 0, &"Animation", &"Transition", 1, &"Animation 2", &"Transition", 2, &"Animation 8", &"Transition", 3, &"Animation 7", &"Transition", 4, &"Animation 4", &"Transition", 5, &"Animation 3", &"Transition", 6, &"attack_up", &"Transition", 7, &"Animation 5", &"Transition", 8, &"Animation 6"]
+node_connections = [&"Transition", 0, &"Animation", &"Transition", 1, &"Animation 2", &"Transition", 2, &"Animation 8", &"Transition", 3, &"Animation 7", &"Transition", 4, &"Animation 4", &"Transition", 5, &"Animation 3", &"Transition", 6, &"attack_up", &"Transition", 7, &"Animation 5", &"Transition", 8, &"Animation 6"]
 
 [node name="Player" type="CharacterBody2D" unique_id=1293030459 node_paths=PackedStringArray("state_machine") groups=["Player"]]
 z_index = 1
@@ -310,8 +345,6 @@ shape = SubResource("CapsuleShape2D_fulsm")
 [node name="AttackHandler" parent="." unique_id=2033557361 instance=ExtResource("3_qhqgy")]
 unique_name_in_owner = true
 
-[node name="RedSlashEffect" parent="." unique_id=1414297839 instance=ExtResource("5_4r5pv")]
-
 [node name="Hurtbox" type="Area2D" parent="." unique_id=435328993]
 visible = false
 collision_layer = 2
@@ -327,12 +360,15 @@ unique_name_in_owner = true
 script = ExtResource("4_dqkch")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=763744756 node_paths=PackedStringArray("player")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=763744756 node_paths=PackedStringArray("player", "anim_player")]
 script = ExtResource("5_qlg0r")
 player = NodePath("../..")
+anim_player = NodePath("../../AnimationPlayer")
 
-[node name="Attacking" type="Node" parent="StateMachine" unique_id=1405823941]
+[node name="Attacking" type="Node" parent="StateMachine" unique_id=1405823941 node_paths=PackedStringArray("player", "anim_player")]
 script = ExtResource("6_tuyoq")
+player = NodePath("../..")
+anim_player = NodePath("../../AnimationPlayer")
 
 [node name="BufferTimer" type="Timer" parent="StateMachine/Attacking" unique_id=1320662380]
 wait_time = 0.35
@@ -342,35 +378,21 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="Parrying" type="Node" parent="StateMachine" unique_id=1574354593]
+[node name="Parrying" type="Node" parent="StateMachine" unique_id=1574354593 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("8_smehm")
+anim_player = NodePath("../../AnimationPlayer")
 
 [node name="ParryTimer" type="Timer" parent="StateMachine/Parrying" unique_id=1571105806]
 
-[node name="Dashing" type="Node" parent="StateMachine" unique_id=2078840237 node_paths=PackedStringArray("player")]
+[node name="Dashing" type="Node" parent="StateMachine" unique_id=2078840237 node_paths=PackedStringArray("player", "anim_player")]
 script = ExtResource("9_jej6c")
 player = NodePath("../..")
+anim_player = NodePath("../../AnimationPlayer")
 
 [node name="DashCooldownTimer" type="Timer" parent="StateMachine/Dashing" unique_id=210514631]
 one_shot = true
 
-[node name="Sounds" type="Node2D" parent="." unique_id=1001894591]
-
-[node name="ParrySuccessful" type="AudioStreamPlayer2D" parent="Sounds" unique_id=501187570]
-stream = ExtResource("9_ur7pv")
-volume_db = -5.0
-max_polyphony = 3
-
-[node name="ParryStart" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1976717634]
-stream = ExtResource("10_y4r1p")
-volume_db = -5.0
-pitch_scale = 0.8
-
-[node name="AttackSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=766959985]
-stream = ExtResource("11_3v2ag")
-max_distance = 4096.0
-
-[node name="PlayerAnimation" type="Node" parent="." unique_id=2085114265 node_paths=PackedStringArray("animation_tree", "player")]
+[node name="PlayerAnimation" type="Node" parent="." unique_id=1709319921 node_paths=PackedStringArray("animation_tree", "player")]
 script = ExtResource("11_d2wvv")
 animation_tree = NodePath("../AnimationTree")
 player = NodePath("..")
@@ -380,6 +402,7 @@ root_node = NodePath("../AnimationTree")
 libraries/ = SubResource("AnimationLibrary_d2wvv")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1461074401]
+active = false
 root_node = NodePath(".")
 tree_root = SubResource("AnimationNodeBlendTree_i4ail")
 advance_expression_base_node = NodePath("..")
@@ -410,6 +433,38 @@ one_shot = true
 [node name="JumpHeightTimer" type="Timer" parent="." unique_id=820485303]
 wait_time = 0.1
 one_shot = true
+
+[node name="AudioManager" type="Node2D" parent="." unique_id=1664780415 node_paths=PackedStringArray("player")]
+unique_name_in_owner = true
+script = ExtResource("14_f1ej7")
+player = NodePath("..")
+
+[node name="Footstep" type="AudioStreamPlayer2D" parent="AudioManager" unique_id=989913368]
+stream = ExtResource("15_oprun")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="AudioManager" unique_id=1872613131]
+stream = ExtResource("16_a8ls1")
+volume_db = -10.0
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="AudioManager" unique_id=186135643]
+stream = ExtResource("17_qfm1y")
+
+[node name="Parry" type="AudioStreamPlayer2D" parent="AudioManager" unique_id=110103914]
+stream = ExtResource("18_fulsm")
+
+[node name="Grounded" type="AudioStreamPlayer2D" parent="AudioManager" unique_id=1911892563]
+stream = ExtResource("15_oprun")
+pitch_scale = 0.5
+
+[node name="PlayerHurt" type="AudioStreamPlayer2D" parent="AudioManager" unique_id=947575651]
+stream = ExtResource("19_60mlk")
+
+[node name="Hitsound" type="AudioStreamPlayer2D" parent="AudioManager" unique_id=6364786]
+stream = ExtResource("20_60mlk")
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="AudioManager" unique_id=397015027]
+stream = ExtResource("21_i4ail")
+volume_db = -15.0
 
 [connection signal="timeout" from="StateMachine/Attacking/ComboTimer" to="StateMachine/Attacking" method="_on_combo_timer_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

@@ -13,6 +13,7 @@ func do_attack(direction):
 	# make hitbox
 	var hitbox = hitbox_scene.instantiate()
 	hitbox.source = %StatsHandler
+	hitbox.Hit.connect(hit)
 	var player = get_parent()
 	player.add_child(hitbox)
 	#vfx_controller.down_slash()
@@ -42,3 +43,6 @@ func do_attack(direction):
 		#vfx_controller.Sprite.position = Vector2(-20, 0)
 		#await get_tree().create_timer(duration).timeout
 		#vfx_controller.Sprite.position = Vector2.ZERO
+
+func hit():
+	%AudioManager.play_hit_sound()
