@@ -7,6 +7,7 @@ class_name RoomRoot extends Node2D
 @export var enemy_count : int
 
 var reward_scene : PackedScene
+var reward_uid : String
 
 signal RoomCompleted
 
@@ -19,4 +20,6 @@ func on_completion():
 	var player_position = get_tree().get_first_node_in_group("Player").global_position
 	var reward = reward_scene.instantiate()
 	call_deferred("add_child", reward)
+	reward.set_reward(reward_uid, "uid://tkjcc8lx3eff")
+	print("reward ready")
 	reward.global_position = player_position

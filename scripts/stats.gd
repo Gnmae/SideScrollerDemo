@@ -84,11 +84,18 @@ func recalculate_stats() -> void:
 	# apply stat buffs
 	for stat_name in stat_multipliers:
 		var cur_property_name: String = str("current_" + stat_name)
-		set(cur_property_name, get(cur_property_name) * stat_multipliers[stat_name])
+		var new_property_value = get(cur_property_name) * stat_multipliers[stat_name]
+		set(cur_property_name, new_property_value)
+		if cur_property_name == "current_max_health":
+			print(stat_multipliers[stat_name])
+			_on_health_set(health * stat_multipliers[stat_name])
 
 	for stat_name in stat_addends:
 		var cur_property_name: String = str("current_" + stat_name)
 		set(cur_property_name, get(cur_property_name) + stat_addends[stat_name])
+		if cur_property_name == "current_max_health":
+			print(stat_addends[stat_name])
+			_on_health_set(health + stat_addends[stat_name])
 
 func _on_health_set(new_value : int) -> void:
 	health = clampi(new_value, 0, current_max_health)

@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://i7d5upcbxyi5" path="res://scripts/player_state_machine/player_idle.gd" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://dlb7epp8rlx8i" path="res://scripts/player_state_machine/player_attacking.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://0gv48bjoqmvt" path="res://scripts/player_state_machine/parrying.gd" id="8_smehm"]
-[ext_resource type="Script" uid="uid://dpmus3yi600tc" path="res://scripts/dashing.gd" id="9_jej6c"]
+[ext_resource type="Script" uid="uid://dpmus3yi600tc" path="res://scripts/player_state_machine/dashing.gd" id="9_jej6c"]
 [ext_resource type="Script" uid="uid://2je0o3m32582" path="res://scripts/player/player_animation.gd" id="11_d2wvv"]
 [ext_resource type="Script" uid="uid://dx47m243qpdlx" path="res://scripts/audio_manager.gd" id="14_f1ej7"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bi5m0746nni1s" path="res://player_animation_state_machine.tres" id="15_a8ls1"]

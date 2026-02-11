@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Reward" format=3 uid="uid://b4w0qk1grr7fy"]
+
+[ext_resource type="Script" uid="uid://c5vtm0txjh28b" path="res://rewards/reward.gd" id="1_7ov2x"]
+[ext_resource type="Script" uid="uid://cparpbcwd2o1k" path="res://scripts/stat_buff.gd" id="2_3m0im"]
+
+[sub_resource type="Resource" id="Resource_7ov2x"]
+script = ExtResource("2_3m0im")
+metadata/_custom_type_script = "uid://cparpbcwd2o1k"
+
+[resource]
+script = ExtResource("1_7ov2x")
+statbuffs = Array[ExtResource("2_3m0im")]([SubResource("Resource_7ov2x")])
+metadata/_custom_type_script = "uid://c5vtm0txjh28b"

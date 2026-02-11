@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://dinglix0mke55" path="res://scripts/enemy_state_machine/enemy_chasing.gd" id="6_jqw88"]
 [ext_resource type="Script" uid="uid://bi7nueyq3bnkh" path="res://scripts/enemy_state_machine/enemy_attacking.gd" id="7_1y3pe"]
 [ext_resource type="Script" uid="uid://bauv1ijhod0mc" path="res://scripts/enemy_animation.gd" id="9_dddk1"]
-[ext_resource type="Script" uid="uid://st6nl2uuyv25" path="res://scripts/enemy_wait.gd" id="9_hsgsh"]
+[ext_resource type="Script" uid="uid://st6nl2uuyv25" path="res://scripts/enemy_state_machine/enemy_wait.gd" id="9_hsgsh"]
 [ext_resource type="Script" uid="uid://bngnoi6xqp0hr" path="res://scripts/parried.gd" id="10_ccqoy"]
 [ext_resource type="Texture2D" uid="uid://du4124uw7xq3t" path="res://assets/Skeleton_White/Skeleton_With_VFX/Skeleton_01_White_Attack1.png" id="13_ausen"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://sccv00c6phxu" path="res://scenes/enemies/skeleton/skeleton_anim_state_machine.tres" id="13_m1dgl"]

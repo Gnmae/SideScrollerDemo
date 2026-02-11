@@ -39,7 +39,9 @@ func setup_room() -> void:
 		for enemy in enemies:
 			enemy.Killed.connect(on_enemy_death)
 	# set room reward
-	var reward_scene = load("uid://brxpjoopqn76u") # replace
+	var reward_scene = load("uid://brxpjoopqn76u") # load reward_scene
+	var new_reward_uid = decide_reward()
+	current_room.reward_uid = new_reward_uid
 	current_room.reward_scene = reward_scene
 	
 	
@@ -50,7 +52,6 @@ func setup_room() -> void:
 	player.can_move = true
 	
 
-
 #--------------------
 # SIGNAL HANDLERS
 #--------------------
@@ -60,5 +61,18 @@ func on_exit_body_entered(body : Node2D, scene_uid : String) -> void:
 		call_deferred("load_room", scene_uid)
 	
 
-func on_enemy_death(enemy):
+func on_enemy_death(enemy) -> void:
 	current_room.update_enemy_count(enemy)
+
+#--------------------
+# REWARD DICTIONARY AND FUNCTIONS
+#--------------------
+
+var reward_dictionary = {
+	0 : "uid://2ofknp88xk0g", # attack increase
+	1 : "uid://doyxn5qlauefm" # health increase
+}
+
+func decide_reward() -> String:
+	var index = randi_range(0, reward_dictionary.size() -1)
+	return reward_dictionary[index]

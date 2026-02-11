@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StatBuff" format=3 uid="uid://doyxn5qlauefm"]
+
+[ext_resource type="Script" uid="uid://cparpbcwd2o1k" path="res://scripts/stat_buff.gd" id="1_8fnfb"]
+
+[resource]
+script = ExtResource("1_8fnfb")
+buff_amount = 20.0
+buff_type = 1
+description = "Increases Max Health by 20"
+metadata/_custom_type_script = "uid://cparpbcwd2o1k"

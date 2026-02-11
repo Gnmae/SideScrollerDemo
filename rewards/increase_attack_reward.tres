@@ -7,5 +7,5 @@ script = ExtResource("1_atqr2")
 stat = 2
 buff_amount = 20.0
 buff_type = 1
-description = "Adds 20 to Attack"
+description = "Increases Attack by 20"
 metadata/_custom_type_script = "uid://cparpbcwd2o1k"

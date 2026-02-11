@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://brxpjoopqn76u"]
+
+[ext_resource type="Script" uid="uid://d13acwd5opxtb" path="res://scripts/interactables/reward_interactable.gd" id="1_lgpa8"]
+[ext_resource type="Texture2D" uid="uid://tkjcc8lx3eff" path="res://assets/placeholder_relic_sprite.png" id="2_jhicn"]
+[ext_resource type="Theme" uid="uid://cotg51a3adfwx" path="res://themes/main_theme.tres" id="3_kyfiv"]
+
+[sub_resource type="Gradient" id="Gradient_6b07h"]
+offsets = PackedFloat32Array(0, 0.72602737)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5t8i8"]
+gradient = SubResource("Gradient_6b07h")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t4ll8"]
+radius = 14.0
+
+[node name="TestAttackRewardScene" type="Node2D" unique_id=964461814 node_paths=PackedStringArray("text_label", "sprite_2d")]
+script = ExtResource("1_lgpa8")
+text_label = NodePath("Panel/MarginContainer/RichTextLabel")
+sprite_2d = NodePath("Sprite2D")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1910974040]
+color = Color(0, 0.50956357, 1, 1)
+energy = 0.5
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_5t8i8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=681771705]
+texture_filter = 1
+texture = ExtResource("2_jhicn")
+
+[node name="InteractArea" type="Area2D" parent="." unique_id=845860568]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=987025192]
+shape = SubResource("CircleShape2D_t4ll8")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1794719062]
+offset_left = -63.0
+offset_top = -84.0
+offset_right = 65.0
+offset_bottom = -20.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1593971357]
+layout_mode = 2
+theme = ExtResource("3_kyfiv")
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer" unique_id=1308832446]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("3_kyfiv")
+text = "No Text Found"
