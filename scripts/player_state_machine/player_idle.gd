@@ -5,7 +5,8 @@ class_name PlayerIdle
 @export var anim_player : AnimationPlayer
 
 func _on_attack_input():
-	Transitioned.emit(self, "attacking")
+	if player.is_on_floor():
+		Transitioned.emit(self, "attacking")
 
 func _on_parry_input():
 	Transitioned.emit(self, "parrying")

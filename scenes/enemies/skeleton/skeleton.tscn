@@ -16,9 +16,10 @@
 [ext_resource type="AnimationNodeStateMachine" uid="uid://sccv00c6phxu" path="res://scenes/enemies/skeleton/skeleton_anim_state_machine.tres" id="13_m1dgl"]
 [ext_resource type="Texture2D" uid="uid://dlyonxryqfvwm" path="res://assets/Skeleton_White/Skeleton_With_VFX/Skeleton_01_White_Idle.png" id="13_q4b65"]
 [ext_resource type="PackedScene" uid="uid://o1grnxkiwyi" path="res://scenes/stats_handler.tscn" id="16_v6rpr"]
+[ext_resource type="PackedScene" uid="uid://c8qmt5mslgb05" path="res://scenes/stagger_bar.tscn" id="18_b36fj"]
 [ext_resource type="Script" uid="uid://bnvuyxwj3e7h8" path="res://scripts/stats.gd" id="18_yjy0a"]
 
-[sub_resource type="Resource" id="Resource_wkpb5"]
+[sub_resource type="Resource" id="Resource_b36fj"]
 resource_local_to_scene = true
 script = ExtResource("18_yjy0a")
 base_max_health = 50
@@ -27,6 +28,7 @@ faction = 1
 metadata/_custom_type_script = "uid://bnvuyxwj3e7h8"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adimu"]
+resource_local_to_scene = true
 shader = ExtResource("2_b36fj")
 shader_parameter/hit_flash_color = Color(1, 1, 1, 1)
 shader_parameter/hit_flash_on = false
@@ -253,7 +255,7 @@ animation_tree = NodePath("../AnimationTree")
 
 [node name="StatsHandler" parent="." unique_id=879032711 node_paths=PackedStringArray("target") instance=ExtResource("16_v6rpr")]
 unique_name_in_owner = true
-stats = SubResource("Resource_wkpb5")
+stats = SubResource("Resource_b36fj")
 target = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=319657665]
@@ -291,3 +293,15 @@ parameters/TimeScale/scale = 1.0
 
 [node name="AudioManager" type="Node2D" parent="." unique_id=1997844058]
 unique_name_in_owner = true
+
+[node name="UI" type="Control" parent="." unique_id=923925975]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StaggerBar" parent="UI" unique_id=1497311889 node_paths=PackedStringArray("target") instance=ExtResource("18_b36fj")]
+layout_mode = 0
+offset_top = -21.0
+offset_bottom = -17.0
+target = NodePath("../../StatsHandler")

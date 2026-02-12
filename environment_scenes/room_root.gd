@@ -21,5 +21,4 @@ func on_completion():
 	var reward = reward_scene.instantiate()
 	call_deferred("add_child", reward)
 	reward.set_reward(reward_uid, "uid://tkjcc8lx3eff")
-	print("reward ready")
 	reward.global_position = player_position

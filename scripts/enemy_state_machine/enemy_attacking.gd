@@ -1,6 +1,7 @@
 extends State
 
 @export var enemy: CharacterBody2D
+@onready var stats_handler: Node = %StatsHandler
 
 var parried : bool = false
 

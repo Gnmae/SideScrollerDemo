@@ -27,7 +27,7 @@ var current_gravity : float = gravity
 var fast_fall_multiplier : float = 1.15
 
 var slow_multiplier : float = 1.0
-const ATTACK_SLOW : float = 0.5
+const ATTACK_SLOW : float = 0.0
 #endregion
 
 #region input/controller related variables
@@ -85,6 +85,7 @@ func jump():
 func _physics_process(delta: float) -> void:
 	if !can_move:
 		velocity = Vector2.ZERO
+		move_and_slide()
 		return
 	
 	if state_machine.current_state.name.to_lower() == "dashing":

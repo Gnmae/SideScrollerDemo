@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c8qmt5mslgb05"]
+
+[ext_resource type="Theme" uid="uid://cotg51a3adfwx" path="res://themes/main_theme.tres" id="1_2t6tm"]
+[ext_resource type="Script" uid="uid://crttl68ven5e4" path="res://scripts/stagger_bar.gd" id="2_ohoxr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohoxr"]
+bg_color = Color(0, 0, 0, 0.39215687)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2t6tm"]
+bg_color = Color(1, 1, 0, 1)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="StaggerBar" type="ProgressBar" unique_id=1497311889]
+custom_minimum_size = Vector2(64, 4)
+offset_left = -32.0
+offset_top = -2.0
+offset_right = 32.0
+offset_bottom = 2.0
+size_flags_horizontal = 0
+theme = ExtResource("1_2t6tm")
+theme_override_styles/background = SubResource("StyleBoxFlat_ohoxr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2t6tm")
+value = 50.0
+show_percentage = false
+script = ExtResource("2_ohoxr")

@@ -16,10 +16,10 @@ func _on_interaction_range_entered(_body : CharacterBody2D):
 	if !interacted and _body is Player:
 		var player = _body
 		player.interactables.push_front(self)
-		print(player.interactables)
+		#print(player.interactables)
 
 func _on_interaction_range_exited(_body : CharacterBody2D):
 	if !interacted and _body is Player:
 		var player = _body
 		player.interactables.erase(self)
-		print(player.interactables)
+		#print(player.interactables)

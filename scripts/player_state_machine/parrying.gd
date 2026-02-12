@@ -5,7 +5,7 @@ extends State
 const DEFAULT_PARRY_WINDOW : float = 0.2
 const PERFECT_PARRY_WINDOW : float = 0.133
 
-const PERFECT_PARRY_FREEZE_TIME : float = 1.0
+const PERFECT_PARRY_FREEZE_TIME : float = 0.6
 const NORMAL_PARRY_FREEZE_TIME : float = 0.3
 
 var parry_window : float = 0.2
@@ -19,13 +19,11 @@ func Enter():
 	Transitioned.emit(self, "idle")
 
 func parry_success(source) -> void:
-	if $ParryTimer.time_left <= PERFECT_PARRY_WINDOW:
+	if $ParryTimer.time_left >= DEFAULT_PARRY_WINDOW - PERFECT_PARRY_WINDOW:
 		%AudioManager.play_parry_sound()
 		source.target.parried()
-		print("perfect parry")
 		Globals.frame_freeze(0.05, PERFECT_PARRY_FREEZE_TIME)
 	elif $ParryTimer.time_left:
 		%AudioManager.play_parry_sound()
 		source.target.parried()
-		print("normal parry")
 		Globals.frame_freeze(0.05, NORMAL_PARRY_FREEZE_TIME)

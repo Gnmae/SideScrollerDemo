@@ -37,7 +37,8 @@ func setup_room() -> void:
 	if current_room.has_method("update_enemy_count"):
 		var enemies = current_room.update_enemy_count()
 		for enemy in enemies:
-			enemy.Killed.connect(on_enemy_death)
+			if !enemy.is_connected("Killed", on_enemy_death):
+				enemy.Killed.connect(on_enemy_death)
 	# set room reward
 	var reward_scene = load("uid://brxpjoopqn76u") # load reward_scene
 	var new_reward_uid = decide_reward()

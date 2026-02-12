@@ -24,6 +24,7 @@ var current_attack_speed : float = 0.42
 #endregion
 
 func Enter():
+	player.can_move = false
 	if !$ComboTimer.is_stopped() and !buffered_attack:
 		current_state += 1
 	buffered_attack = false
@@ -52,6 +53,8 @@ func _on_attack_input():
 	if !$ComboTimer.is_stopped():
 		buffered_attack = true
 
-
 func _on_combo_timer_timeout() -> void:
 	current_state = 0
+
+func Exit() -> void:
+	player.can_move = true
